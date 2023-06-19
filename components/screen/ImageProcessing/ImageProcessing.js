@@ -14,10 +14,17 @@ import {
 
 var ImagePicker = require('react-native-image-picker');
 const PhotoSelectionPage = () => {
+
+  // Array luu tru cac anh da chon
   const [selectedImages, setSelectedImages] = useState([]);
+
+  // Toi da 5 anh
   const MAX_IMAGES = 5;
 
+  // Chon anh tu thu vien
   const handleChoosePhoto = () => {
+
+    // cau hinh cho ImagePicker
     const options = {
       title: 'Select Photo',
       mediaType: 'photo',
@@ -33,14 +40,18 @@ const PhotoSelectionPage = () => {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
       } else {
+
+        // Them anh vao mang selectedImages
         const newImages = response.assets.map((asset) => ({
           uri: asset.uri,
+
+          // Ten anh la image_ + thoi gian hien tai (neu khong co ten)
           name: asset.fileName || `image_${Date.now()}`,
         }));
         setSelectedImages((prevImages) => [...prevImages, ...newImages]);
+
+        // Goi API cho tung anh va xoa anh sau khi goi API
         newImages.forEach((image) => {
           callAPI(image, () => {
             deleteImage(image);
@@ -50,7 +61,10 @@ const PhotoSelectionPage = () => {
     });
   };
 
+  // Chup anh
   const handleTakePhoto = () => {
+
+    // cau hinh cho ImagePicker
     const options = {
       title: 'Take Photo',
       mediaType: 'photo',
@@ -65,11 +79,15 @@ const PhotoSelectionPage = () => {
       } else if (response.error) {
         console.log('Camera Error: ', response.error);
       } else {
+
+        // Them anh vao mang selectedImages
         const newImage = {
           uri: response.uri,
           name: `image_${Date.now()}`,
         };
         setSelectedImages((prevImages) => [...prevImages, newImage]);
+
+        // Goi API cho anh va xoa anh sau khi goi API
         callAPI(newImage, () => {
           deleteImage(newImage);
         });
@@ -77,24 +95,28 @@ const PhotoSelectionPage = () => {
     });
   };
 
+  // Goi API
   const callAPI = async (image, callback) => {
     try {
       const formData = new FormData();
       formData.append('image', {
         uri: image.uri,
-        type: 'image/jpeg',
+        // Cac file anh cho phep: jpeg, png, jpg
+        type: 'image/jpeg' || 'image/png' || 'image/jpg',
         name: image.name,
       });
 
+      // Goi API
       const response = await fetch('http://1.52.246.101:5000/handle-lcd/handle-lcd', {
         method: 'POST',
         body: formData,
       });
 
+      // Lay ket qua tra ve tu API
       const data = await response.json();
       console.log('API Response:', data);
 
-      // Invoke the callback function after API call is completed
+      // Goi callback
       if (typeof callback === 'function') {
         callback();
       }
@@ -103,6 +125,7 @@ const PhotoSelectionPage = () => {
     }
   };
 
+  // Xoa anh
   const deleteImage = (imageToDelete) => {
     setSelectedImages((prevImages) =>
       prevImages.filter((image) => image.uri !== imageToDelete.uri)
