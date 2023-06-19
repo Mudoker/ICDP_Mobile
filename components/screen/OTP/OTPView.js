@@ -23,7 +23,6 @@ export default function OTPScreen({ setOtpInput }) {
     <OTPTextView
       handleTextChange={(e) => {setOtpInput(e)}}
       inputCount={6}
-      containerStyle={styles.container}
       textInputStyle={styles.text}
     />
   )
