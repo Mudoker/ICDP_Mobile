@@ -80,6 +80,7 @@ export default function Login({ navigation }) {
     } else {
       alert('Login successfully')
       setOtp(prev => !prev)
+      setVisible(false);
     };
   };
 

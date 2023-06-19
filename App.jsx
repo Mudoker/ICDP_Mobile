@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DrawContent } from './components/CustomDrawer';
 import Home from './components/Home';
 import SignInScreen from './components/screen/Login/Login';
+import PhotoSelectionPage from './components/screen/ImageProcessing/ImageProcessing'
 import MyStack from './components/SidebarMenu';
 import {Reanimated} from 'react-native-reanimated';
 
@@ -83,20 +84,22 @@ const App = () => {
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        {initLoginState.userToken !== null ? (
-          <Drawer.Navigator drawerContent={(props) => <DrawContent {...props} />}>
-            <Drawer.Screen name="Overview" component={Home} />
-          </Drawer.Navigator>
-        ) : (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="Home" component={MyStack} />
-          </Stack.Navigator>
-        )}
-      </NavigationContainer>
-    </AuthContext.Provider>
+
+    // <AuthContext.Provider value={authContext}>
+    //   <NavigationContainer>
+    //     {initLoginState.userToken !== null ? (
+    //       <Drawer.Navigator drawerContent={(props) => <DrawContent {...props} />}>
+    //         <Drawer.Screen name="Overview" component={Home} />
+    //       </Drawer.Navigator>
+    //     ) : (
+    //       <Stack.Navigator screenOptions={{ headerShown: false }}>
+    //         <Stack.Screen name="SignIn" component={SignInScreen} />
+    //         <Stack.Screen name="Home" component={MyStack} />
+    //       </Stack.Navigator>
+    //     )}
+    //   </NavigationContainer>
+    // </AuthContext.Provider>
+    <PhotoSelectionPage/>
   );
 };
 
