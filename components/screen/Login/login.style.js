@@ -34,9 +34,9 @@ export const styles = StyleSheet.create({
     width: 159,
     height: 30,
     left: '50%',
-    top: 14,
+    top: 50,
     transform: [{ translateX: -79 }],
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 15,
@@ -53,9 +53,9 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     width: 346,
     height: '100%',
-    left: '50%',
+    // left: '50%',
     top: '50%',
-    marginLeft: -173,
+    // marginLeft: -173,
     marginTop: -170,
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
@@ -80,13 +80,13 @@ export const styles = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, 0)',
     color: '#163892',
     fontWeight: '700',
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
   },
   footNote: {
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
+    alignSelf: 'center',
     fontWeight: 700,
     fontSize: 10,
-    left: -89,
     top: -30,
     letterSpacing: 0.035,
   },
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
   },
   helpTextContainer: {
     position: 'absolute',
-    top: -210, // Adjust the value as needed
+    top: -200, // Adjust the value as needed
     left: 0,
     right: 0,
     justifyContent: 'center',
@@ -105,7 +105,7 @@ export const styles = StyleSheet.create({
     marginTop: 10, // Add margin top to the helpTextContainer
   },
   helpText: {
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     color: '#988D8D',
     marginHorizontal: 10,
     marginBottom: 10, // Add margin bottom to the helpText
@@ -143,7 +143,7 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 0.04,
     color: '#988D8D',
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     fontSize: 11,
     marginTop: 10,
   },
@@ -152,14 +152,13 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginTop: 20,
   },
   button: {
     position: 'absolute',
     backgroundColor: 'rgba(7, 121, 255, 0.8)',
     width: 205,
     height: 31,
-    top: -260,
+    top: -290,
     left: '50%',
     marginLeft: -102.5,
     marginBottom: 10, // Adjust the value as needed

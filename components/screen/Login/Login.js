@@ -129,9 +129,12 @@ export default function Login({ navigation }) {
       end={{ x: 1, y: 1 }}
     >
       <SafeAreaView style={[styles.container, { paddingTop: 120 }]}>
+      {/* <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}> */}
         <Text style={styles.title}>FTEL - KTKT - INF MN</Text>
         <StatusBar barStyle="light-content" />
-        <KeyboardAvoidingView behavior="height" style={styles.container}>
+        
           <TouchableWithoutFeedback
             style={styles.container}
             accessible={true}
@@ -147,7 +150,7 @@ export default function Login({ navigation }) {
                 <Text style={styles.notifyContainer}>
                   Welcome to App ICDP
                 </Text>
-                <Text style={styles.footNote}>Hướng dẫn chi tiết <Text style={styles.footNoteLink} >Tại đây</Text> </Text>
+                <Text style={styles.footNote}>Hướng dẫn đăng nhập hệ thống <Text style={styles.footNoteLink} >Tại đây</Text> </Text>
                 <TextInput
                   
                   style={styles.input}
@@ -167,7 +170,7 @@ export default function Login({ navigation }) {
                 <View style={styles.buttonContainer}>
                   <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText} onPress={onPressLogin}>
-                      Login
+                      ĐĂNG NHẬP
                     </Text>
                   </TouchableOpacity>
                   <View style={styles.helpTextContainer}>
@@ -181,7 +184,7 @@ export default function Login({ navigation }) {
                     disabled={getOtp}
                     onPress={onGetOTP}>
                     <Text style={styles.buttonText}>
-                      GET OTP{' '}
+                      GET OTP
                       {getOtp ? (
                         <CountDownText
                           countType="seconds"
@@ -213,7 +216,7 @@ export default function Login({ navigation }) {
               </Snackbar>
             </View>
           </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
       </SafeAreaView>
     </LinearGradient>
   );
