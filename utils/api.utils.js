@@ -19,3 +19,22 @@ export async function fetchAPI(url, body, method) {
     return false;
   }
 }
+
+export async function login(method, url, body) {
+  try {
+    const raw = JSON.stringify(body);
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    requestOptions = {
+      method: method,
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    const data = await fetch(url, requestOptions);
+    return data.text();
+  } catch (error) {
+    console.log(`login error: ${error}`);
+    return false;
+  }
+}
