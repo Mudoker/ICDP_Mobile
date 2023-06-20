@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     left: '50%',
     top: 14,
     transform: [{ translateX: -79 }],
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     fontStyle: 'normal',
     fontWeight: '700',
     fontSize: 15,
@@ -80,10 +80,10 @@ export const styles = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, 0)',
     color: '#163892',
     fontWeight: '700',
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
   },
   footNote: {
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     fontWeight: 700,
     fontSize: 10,
     left: -89,
@@ -105,7 +105,7 @@ export const styles = StyleSheet.create({
     marginTop: 10, // Add margin top to the helpTextContainer
   },
   helpText: {
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     color: '#988D8D',
     marginHorizontal: 10,
     marginBottom: 10, // Add margin bottom to the helpText
@@ -143,7 +143,7 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 0.04,
     color: '#988D8D',
-    fontFamily: 'Neue Haas Grotesk Text Pro',
+    // fontFamily: 'Neue Haas Grotesk Text Pro',
     fontSize: 11,
     marginTop: 10,
   },
