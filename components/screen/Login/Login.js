@@ -124,6 +124,7 @@ export default function Login({ navigation }) {
         }
       }
       setOtp(prev => !prev)
+      setVisible(false);
     };
   };
 

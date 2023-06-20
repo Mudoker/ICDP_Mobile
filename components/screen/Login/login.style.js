@@ -80,7 +80,6 @@ export const styles = StyleSheet.create({
   },
   footNote: {
     // fontFamily: 'Neue Haas Grotesk Text Pro',
-    alignSelf: 'center',
     fontWeight: 700,
     fontSize: 10,
     top: -30,
