@@ -106,6 +106,7 @@ export default function Login({ navigation }) {
           text1: 'Vui lòng đợi...',
         }, ToastAndroid.SHORT);
         const res = await login('post', 'http://1.52.246.101:5000/user/login-user', { email: data?.username, otp: '123456' });
+        console.log('-----------', res);
         if (!res || !JSON.parse(res)?.status) {
           setSnackBarText('Invalid Email!');
           setVisible(true);
@@ -115,12 +116,12 @@ export default function Login({ navigation }) {
           }, ToastAndroid.SHORT);
         } else {
           const convertRes = JSON.parse(res);
-          console.log(convertRes);
-          setTxtButtonLogin(TXT_OTP);
+          console.log('**************', convertRes);
           Toast.show({
             type: 'success',
             text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
-          }, ToastAndroid.SHORT);
+          });
+          setTxtButtonLogin(TXT_OTP);
         }
       }
       setOtp(prev => !prev)
