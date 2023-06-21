@@ -175,7 +175,7 @@ export default function Login({ navigation }) {
       end={{ x: 1, y: 1 }}
     >
       <SafeAreaView style={[styles.container, { paddingTop: 120 }]}>
-      {snackBarText !== '' ? <Toast /> : <></>}
+      <Toast />
       {/* <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}> */}

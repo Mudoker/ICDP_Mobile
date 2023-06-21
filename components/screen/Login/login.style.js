@@ -84,6 +84,7 @@ export const styles = StyleSheet.create({
     fontSize: 10,
     top: -30,
     letterSpacing: 0.035,
+    alignSelf: 'center'
   },
   stroke: {
     width: 100,

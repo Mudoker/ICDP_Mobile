@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
         height: 20,
         left: 6,
         top: 85,
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '700',
         fontSize: 12,

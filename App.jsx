@@ -85,21 +85,21 @@ const App = () => {
 
   return (
 
-    // <AuthContext.Provider value={authContext}>
-    //   <NavigationContainer>
-    //     {initLoginState.userToken !== null ? (
-    //       <Drawer.Navigator drawerContent={(props) => <DrawContent {...props} />}>
-    //         <Drawer.Screen name="Overview" component={Home} />
-    //       </Drawer.Navigator>
-    //     ) : (
-    //       <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //         <Stack.Screen name="SignIn" component={SignInScreen} />
-    //         <Stack.Screen name="Home" component={MyStack} />
-    //       </Stack.Navigator>
-    //     )}
-    //   </NavigationContainer>
-    // </AuthContext.Provider>
-    <PhotoSelectionPage/>
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        {initLoginState.userToken !== null ? (
+          <Drawer.Navigator drawerContent={(props) => <DrawContent {...props} />}>
+            <Drawer.Screen name="Overview" component={Home} />
+          </Drawer.Navigator>
+        ) : (
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            {/* <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="Home" component={MyStack} /> */}
+            <Stack.Screen name="Tool" component={PhotoSelectionPage} />
+          </Stack.Navigator>
+        )}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
 
