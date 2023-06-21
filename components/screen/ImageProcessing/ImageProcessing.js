@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { styles } from './ImageProcess.style';
-import { View, Button, Image, Touchable } from 'react-native';
+import { View, Button, Image, Touchable, Alert } from 'react-native';
+import axios from 'axios';
+import FormData from 'form-data';
+import Toast from 'react-native-toast-message';
+
 import {
   Text,
   TextInput,
@@ -22,7 +26,7 @@ const PhotoSelectionPage = () => {
   const MAX_IMAGES = 5;
 
   // Function: Choose photo from library
-  const handleChoosePhoto = () => {
+  const handleChoosePhoto = async () => {
 
     // ImagePicker configuration
     const options = {
@@ -31,34 +35,41 @@ const PhotoSelectionPage = () => {
       maxWidth: 500,
       maxHeight: 500,
       // Highest quality
-      quality: 1,
+      // quality: 1,
       multiple: true,
+      selectionLimit: 5,
       maxFiles: MAX_IMAGES - selectedImages.length,
     };
+    ImagePicker.launchImageLibrary(options, async (response) => {
+      try {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else {
+          // Add images to selectedImages array
+          const newImages = response.assets.map((asset) => ({
+            uri: asset.uri,
+            // url: './testok.jpg',
+            // If File name is not available -> generate a custom file name
+            name: asset.fileName || `image_${Date.now()}`,
+          }));
+          setSelectedImages((prevImages) => [...prevImages, ...newImages]);
 
-    ImagePicker.launchImageLibrary(options, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else {
+          // Trigger API call for each image and delete it after API call
+          const resultLCD = await callAPIVer2(newImages);
 
-        // Add images to selectedImages array
-        const newImages = response.assets.map((asset) => ({
-          uri: asset.uri,
-
-          // If File name is not available -> generate a custom file name
-          name: asset.fileName || `image_${Date.now()}`,
-        }));
-        setSelectedImages((prevImages) => [...prevImages, ...newImages]);
-
-        // Trigger API call for each image and delete it after API call
-        newImages.forEach((image) => {
-          callAPI(image, () => {
-            deleteImage(image);
+          console.log(resultLCD);
+          Toast.show({
+            type: 'success',
+            text1: `Kết quả: R = ${resultLCD?.data[0]?.R}; V = ${resultLCD?.data[0]?.U}`,
           });
-        });
+          // deleteImage(image);
+        }
+      } catch (error) {
+        
       }
+
     });
   };
 
@@ -92,37 +103,45 @@ const PhotoSelectionPage = () => {
         setSelectedImages((prevImages) => [...prevImages, newImage]);
 
         // Trigger API call for the image and delete it after API call
-        callAPI(newImage, () => {
+        callAPIVer2(newImage, () => {
           deleteImage(newImage);
         });
       }
     });
   };
 
-  // Function: Call API
-  const callAPI = async (image, callback) => {
+  const callAPIVer2 = async (image) => {
     try {
-      const formData = new FormData();
-      formData.append('image', {
-        uri: image.uri,
-        // Allowed file types: png, jpg/jpeg
-        type: 'image/jpeg' || 'image/png' || 'image/jpg',
-        name: image.name,
-      });
-      // API call
-      const response = await fetch('http://1.52.246.101:5000/handle-lcd/handle-lcd', {
-        method: 'POST',
-        body: formData,
-      });
-
-      // API response
-      const data = await response.json();
-      console.log('API Response:', data);
-
-      // Trigger callback function (deleteImage)
-      if (typeof callback === 'function') {
-        callback();
+      let data = new FormData();
+      if (Array.isArray(image)) {
+        image.forEach(element => {
+          data.append('image', {
+            uri: element?.uri,  // ! Path image
+            type: 'image/jpeg',
+            name: element?.name // ! Name image add
+          });
+        });
       }
+      else {
+        data.append('image', {
+          uri: image?.uri,  // ! Path image
+          type: 'image/jpeg',
+          name: image?.name // ! Name image add
+        });
+      }
+
+      let config = {
+        method: 'post',
+        url: 'http://1.52.246.101:5000/handle-lcd/handle-lcd',
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        data : data
+      };
+      const payload = await axios(config);
+      console.log(payload.data);
+      return payload.data
+      
     } catch (error) {
       console.log('API Error:', error);
     }
@@ -152,6 +171,7 @@ const PhotoSelectionPage = () => {
       </View>
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
+      {/* Upload IMAGE */}
       <TouchableOpacity
         style={[styles.buttonLibrary, { top: 350 }, selectedImages.length >= MAX_IMAGES && styles.disabledButton]}
         onPress={handleChoosePhoto}
@@ -163,6 +183,7 @@ const PhotoSelectionPage = () => {
         </Text>
       </TouchableOpacity>
 
+      {/* Take a picture */}
       <TouchableOpacity
         style={[styles.buttonLibrary, { top: 500 }]}
         onPress={handleTakePhoto}
@@ -172,6 +193,7 @@ const PhotoSelectionPage = () => {
           Take a photo
         </Text>
       </TouchableOpacity>
+      <Toast />
 
     </View>
   );
