@@ -113,13 +113,22 @@ const PhotoSelectionPage = () => {
   const callAPIVer2 = async (image) => {
     try {
       let data = new FormData();
-      image.forEach(element => {
-        data.append('image', {
-          uri: element?.uri,  // ! Path image
-          type: 'image/jpeg',
-          name: element?.name // ! Name image add
+      if (Array.isArray(image)) {
+        image.forEach(element => {
+          data.append('image', {
+            uri: element?.uri,  // ! Path image
+            type: 'image/jpeg',
+            name: element?.name // ! Name image add
+          });
         });
-      });
+      }
+      else {
+        data.append('image', {
+          uri: image?.uri,  // ! Path image
+          type: 'image/jpeg',
+          name: image?.name // ! Name image add
+        });
+      }
 
       let config = {
         method: 'post',
@@ -130,6 +139,7 @@ const PhotoSelectionPage = () => {
         data : data
       };
       const payload = await axios(config);
+      console.log(payload.data);
       return payload.data
       
     } catch (error) {

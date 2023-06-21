@@ -99,8 +99,8 @@ const App = () => {
     //     )}
     //   </NavigationContainer>
     // </AuthContext.Provider>
-    <Dashboard/>
-    // <PhotoSelectionPage/>
+    // <Dashboard/>
+    <PhotoSelectionPage/>
   );
 };
 
