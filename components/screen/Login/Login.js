@@ -107,6 +107,7 @@ export default function Login({ navigation }) {
           text1: 'Vui lòng đợi...',
         }, ToastAndroid.SHORT);
         const res = await login('post', 'http://1.52.246.101:5000/user/login-user', { email: data?.username, otp: '123456' });
+        console.log('-----------', res);
         if (!res || !JSON.parse(res)?.status) {
           setSnackBarText('Invalid Email!');
           setVisible(true);
@@ -116,12 +117,12 @@ export default function Login({ navigation }) {
           }, ToastAndroid.SHORT);
         } else {
           const convertRes = JSON.parse(res);
-          console.log(convertRes);
-          setTxtButtonLogin(TXT_OTP);
+          console.log('**************', convertRes);
           Toast.show({
             type: 'success',
             text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
-          }, ToastAndroid.SHORT);
+          });
+          setTxtButtonLogin(TXT_OTP);
         }
       }
       setOtp(prev => !prev)
@@ -184,6 +185,19 @@ export default function Login({ navigation }) {
           <Text style={styles.title}>FTEL - KTKT - INF MN</Text>
           <StatusBar barStyle="light-content" />
 
+    <LinearGradient style={styles.backGround}
+      colors={['rgba(44, 11, 245, 0.6808)', 'rgba(255, 253, 253, 0.92)']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+    >
+      <SafeAreaView style={[styles.container, { paddingTop: 120 }]}>
+      <Toast />
+      {/* <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}> */}
+        <Text style={styles.title}>FTEL - KTKT - INF MN</Text>
+        <StatusBar barStyle="light-content" />
+        
           <TouchableWithoutFeedback
             style={styles.container}
             accessible={true}
