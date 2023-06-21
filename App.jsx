@@ -10,7 +10,7 @@ import SignInScreen from './components/screen/Login/Login';
 import PhotoSelectionPage from './components/screen/ImageProcessing/ImageProcessing'
 import MyStack from './components/SidebarMenu';
 import {Reanimated} from 'react-native-reanimated';
-
+import Dashboard from './components/Dashboard/Dashboard';
 // Reanimated.initialize();
 import { AuthContext } from './components/Context/AuthContext';
 
@@ -99,7 +99,10 @@ const App = () => {
     //     )}
     //   </NavigationContainer>
     // </AuthContext.Provider>
-    <PhotoSelectionPage/>
+    
+    // <PhotoSelectionPage />
+    <Dashboard/>
+    
   );
 };
 
