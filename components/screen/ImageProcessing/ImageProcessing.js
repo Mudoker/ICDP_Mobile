@@ -103,7 +103,7 @@ const PhotoSelectionPage = () => {
         setSelectedImages((prevImages) => [...prevImages, newImage]);
 
         // Trigger API call for the image and delete it after API call
-        callAPI(newImage, () => {
+        callAPIVer2(newImage, () => {
           deleteImage(newImage);
         });
       }
