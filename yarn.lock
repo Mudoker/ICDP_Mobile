@@ -2155,6 +2155,11 @@
     "@typescript-eslint/types" "5.59.8"
     eslint-visitor-keys "^3.3.0"
 
+"@yarnpkg/lockfile@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@yarnpkg/lockfile/-/lockfile-1.1.0.tgz"
+  integrity sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==
+
 abort-controller@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/abort-controller/-/abort-controller-3.0.0.tgz"
@@ -3092,6 +3097,18 @@ dedent@^0.7.0:
   resolved "https://registry.npmjs.org/dedent/-/dedent-0.7.0.tgz"
   integrity sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==
 
+deep-equal@^1.0.0:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/deep-equal/-/deep-equal-1.1.1.tgz"
+  integrity sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==
+  dependencies:
+    is-arguments "^1.0.4"
+    is-date-object "^1.0.1"
+    is-regex "^1.0.4"
+    object-is "^1.0.1"
+    object-keys "^1.1.1"
+    regexp.prototype.flags "^1.2.0"
+
 deep-is@^0.1.3:
   version "0.1.4"
   resolved "https://registry.npmjs.org/deep-is/-/deep-is-0.1.4.tgz"
@@ -3811,6 +3828,11 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
+findit@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/findit/-/findit-2.0.0.tgz"
+  integrity sha512-ENZS237/Hr8bjczn5eKuBohLgaD0JyUd0arxretR1f9RO46vZHA1b2y0VorgGV3WaOT3c+78P8h7v4JGJ1i/rg==
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/flat-cache/-/flat-cache-3.0.4.tgz"
@@ -3871,6 +3893,15 @@ fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz"
   integrity sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==
+
+fs-extra@^0.22.1:
+  version "0.22.1"
+  resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-0.22.1.tgz"
+  integrity sha512-M7CuxS2f9k/5il8ufmLiCtT7B2O2JLoTZi83ZtyEJMG67cTn87fNULYWtno5Vm31TxmSRE0nkA9GxaRR+y3XTA==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^2.1.0"
+    rimraf "^2.2.8"
 
 fs-extra@^8.1.0:
   version "8.1.0"
@@ -4025,7 +4056,7 @@ gopd@^1.0.1:
   dependencies:
     get-intrinsic "^1.1.3"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.3, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
+graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.3, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
   version "4.2.11"
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.11.tgz"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
@@ -4261,6 +4292,14 @@ is-accessor-descriptor@^1.0.0:
   dependencies:
     kind-of "^6.0.0"
 
+is-arguments@^1.0.4:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/is-arguments/-/is-arguments-1.1.1.tgz"
+  integrity sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==
+  dependencies:
+    call-bind "^1.0.2"
+    has-tostringtag "^1.0.0"
+
 is-array-buffer@^3.0.1, is-array-buffer@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/is-array-buffer/-/is-array-buffer-3.0.2.tgz"
@@ -4436,7 +4475,7 @@ is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   dependencies:
     isobject "^3.0.1"
 
-is-regex@^1.1.4:
+is-regex@^1.0.4, is-regex@^1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/is-regex/-/is-regex-1.1.4.tgz"
   integrity sha512-kvRdxDsxZjhzUX07ZnLydzS1TU/TJlTUHHY4YLL87e37oUA49DfkLqgy+VjFocowy29cKvcSiu+kIv728jTTVg==
@@ -5095,6 +5134,13 @@ json5@^2.2.2:
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
+jsonfile@^2.1.0:
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/jsonfile/-/jsonfile-2.4.0.tgz"
+  integrity sha512-PKllAqbgLgxHaj8TElYymKCAgrASebJrWpTnEkOaTowt23VKXXN0sUeriJ+eh7y6ufb/CC5ap11pz71/cM0hUw==
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
 jsonfile@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz"
@@ -5643,7 +5689,7 @@ minimatch@^3.0.2, minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatc
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.2.6:
+minimist@^1.1.2, minimist@^1.2.6:
   version "1.2.8"
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
@@ -5814,6 +5860,14 @@ object-inspect@^1.12.3, object-inspect@^1.9.0:
   resolved "https://registry.npmjs.org/object-inspect/-/object-inspect-1.12.3.tgz"
   integrity sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==
 
+object-is@^1.0.1:
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/object-is/-/object-is-1.1.5.tgz"
+  integrity sha512-3cyDsyHgtmi7I7DfSSI2LDp6SK2lwvtbg0p0R1e0RvTqF5ceGx+K2dfSjm1bKDMVCFEDAQvy+o8c6a7VujOddw==
+  dependencies:
+    call-bind "^1.0.2"
+    define-properties "^1.1.3"
+
 object-keys@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/object-keys/-/object-keys-1.1.1.tgz"
@@ -5862,7 +5916,7 @@ object.hasown@^1.1.2:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
 
-object.pick@^1.3.0:
+object.pick@^1.1.1, object.pick@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/object.pick/-/object.pick-1.3.0.tgz"
   integrity sha512-tqa/UMy/CCoYmj+H5qc07qvSL9dqcs/WZENZ1JbtWBlATP+iVOe778gE6MSijnyCnORzDuX6hU+LA4SZ09YjFQ==
@@ -6312,7 +6366,11 @@ react-native-fs@^2.20.0:
     base-64 "^0.1.0"
     utf8 "^3.0.0"
 
+<<<<<<< HEAD
 react-native-gesture-handler@^2.10.1, "react-native-gesture-handler@>= 1.0.0", "react-native-gesture-handler@>= 1.5.0":
+=======
+react-native-gesture-handler@^2.10.1, "react-native-gesture-handler@>= 1.0.0":
+>>>>>>> 644ea79a1ec191f45f584a4452d59e781bf749e6
   version "2.10.1"
   resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.10.1.tgz"
   integrity sha512-vDJx3KnheMLEPg35chQW6aiNGqfv3tmWGRRzmfVvqnvvIt5pNkxXe8+x7CYpfIAAnqNLaK1xiozvMkzZPRw1vw==
@@ -6578,7 +6636,7 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
 
-regexp.prototype.flags@^1.4.3:
+regexp.prototype.flags@^1.2.0, regexp.prototype.flags@^1.4.3:
   version "1.5.0"
   resolved "https://registry.npmjs.org/regexp.prototype.flags/-/regexp.prototype.flags-1.5.0.tgz"
   integrity sha512-0SutC3pNudRKgquxGoRGIz946MZVHqbNfPjBdxeOhBrdgDKlRoXmYLQN9xRbrR09ZXWeGAdPuif7egofn6v5LA==
@@ -6694,6 +6752,13 @@ reusify@^1.0.4:
   resolved "https://registry.npmjs.org/reusify/-/reusify-1.0.4.tgz"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
 
+rimraf@^2.2.8:
+  version "2.7.1"
+  resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz"
+  integrity sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
+  dependencies:
+    glob "^7.1.3"
+
 rimraf@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/rimraf/-/rimraf-3.0.2.tgz"
@@ -6713,7 +6778,22 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
-run-parallel@^1.1.9:
+rn-nodeify@^10.3.0:
+  version "10.3.0"
+  resolved "https://registry.npmjs.org/rn-nodeify/-/rn-nodeify-10.3.0.tgz"
+  integrity sha512-EZB3M4M5i8yySCWF7AAZ31xU7cpdLuIKMlVxXji9t0aY8Ojy3BAyRt1sTp0OwBgy1ejShmlIu2L4f8mToJ+uvg==
+  dependencies:
+    "@yarnpkg/lockfile" "^1.0.0"
+    deep-equal "^1.0.0"
+    findit "^2.0.0"
+    fs-extra "^0.22.1"
+    minimist "^1.1.2"
+    object.pick "^1.1.1"
+    run-parallel "^1.1.2"
+    semver "^5.0.1"
+    xtend "^4.0.0"
+
+run-parallel@^1.1.2, run-parallel@^1.1.9:
   version "1.2.0"
   resolved "https://registry.npmjs.org/run-parallel/-/run-parallel-1.2.0.tgz"
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
@@ -6752,6 +6832,11 @@ scheduler@^0.23.0:
   integrity sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==
   dependencies:
     loose-envify "^1.1.0"
+
+semver@^5.0.1:
+  version "5.7.1"
+  resolved "https://registry.npmjs.org/semver/-/semver-5.7.1.tgz"
+  integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
 
 semver@^5.5.0:
   version "5.7.1"
@@ -7638,7 +7723,7 @@ ws@^7, ws@^7.5.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.9.tgz"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
-xtend@~4.0.1:
+xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
   resolved "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz"
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
