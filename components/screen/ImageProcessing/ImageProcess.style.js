@@ -95,4 +95,8 @@ export const styles = StyleSheet.create({
         width: 31,
         height: 31,
     },
+
+    navBar: {
+        backgroundColor: 'black',
+    }
 })
