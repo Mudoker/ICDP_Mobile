@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { styles } from './ImageProcess.style';
-import { View, Button, Image, Touchable, Alert } from 'react-native';
+import { View, Button, Image, Touchable, Alert, Permission, PermissionsAndroid } from 'react-native';
 import axios from 'axios';
 import FormData from 'form-data';
 import Toast from 'react-native-toast-message';
+
+import {requestMultiple, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 import {
   Text,
@@ -74,16 +76,16 @@ const PhotoSelectionPage = () => {
   };
 
   // Function: Take photo from camera
-  const handleTakePhoto = () => {
-
+  const handleTakePhoto = async () => {
     // ImagePicker configuration
     const options = {
       title: 'Take Photo',
-      mediaType: 'photo',
+      // mediaType: 'photo',
       maxWidth: 500,
       maxHeight: 500,
+      // includeBase64: true,
       // Highest quality
-      quality: 1,
+      // quality: 1,
     };
 
     ImagePicker.launchCamera(options, (response) => {
@@ -108,6 +110,13 @@ const PhotoSelectionPage = () => {
         });
       }
     });
+    // const rq = await request('camera', { type: 'always' });
+    // console.log(rq);
+    // const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
+    // if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
+    //   const payload = await ImagePicker.launchCamera(options);
+    //   console.log(payload);
+    // }
   };
 
   const callAPIVer2 = async (image) => {
