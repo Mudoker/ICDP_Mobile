@@ -3,7 +3,6 @@ import { View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { DrawContent } from './components/CustomDrawer';
 import Home from './components/Home';
 import SignInScreen from './components/screen/Login/Login';
@@ -13,7 +12,8 @@ import {Reanimated} from 'react-native-reanimated';
 import Dashboard from './components/screen/Dashboard/Dashboard';
 // Reanimated.initialize();
 import { AuthContext } from './components/Context/AuthContext';
-
+import Navigator from './components/routes/homeStack'
+import NavPane from './components/screen/NavPane/NavPane';
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -100,7 +100,9 @@ const App = () => {
     //   </NavigationContainer>
     // </AuthContext.Provider>
     // <Dashboard/>
-    <PhotoSelectionPage/>
+    // <PhotoSelectionPage/>
+    <Navigator />
+    // <NavPane/>
   );
 };
 

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { styles } from './Tools.style';
-
+import NavPane from '../NavPane/NavPane';
 const DashboardPage = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
   const cardData = [
     { id: 1, title: 'Kế hoạch', category: 'Calendar', image: require('../../../assets/images/calendar_icon.png') },
     { id: 2, title: 'Tổng quan', category: 'Statistics', image: require('../../../assets/images/stat_icon.png') },
@@ -24,7 +29,9 @@ const DashboardPage = () => {
     <View>
       <View style={{ backgroundColor: '#6C56F5', height: 40 }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image style={[styles.backIcon, { marginTop: 5 }]} source={require('../../../assets/images/nav.png')}></Image>
+          <TouchableOpacity onPress={toggleVisibility}>
+            <Image style={[styles.backIcon, { marginTop: 5 }]} source={require('../../../assets/images/nav.png')}></Image>
+          </TouchableOpacity>
           <Image style={[styles.backIcon, { marginTop: 10, marginLeft: 350, width: 22, height: 22 }]} source={require('../../../assets/images/setting_icon.png')}></Image>
           <TouchableOpacity style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]} onPress={() => navigation.goBack()}>
 
@@ -34,25 +41,28 @@ const DashboardPage = () => {
         </TouchableOpacity>
         <Image style={[styles.header, { marginTop: 5 }]} source={require('../../../assets/images/INAS_mobile_logo_2.png')}></Image>
       </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Tools</Text>
-          <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')}></Image>
-        </View>
-        <View style={styles.cardContainer}>
-          {cardData.map((card) => (
-            <TouchableOpacity
-              key={card.id}
-              style={styles.card}
-              onPress={() => handleCardPress(card.id)}
-            >
-              <Image source={card.image} />
-              <Text style={styles.cardTitle}>{card.title}</Text>
-              <Text style={styles.cardCategory}>{card.category}</Text>
-              <Image style={styles.cardImage} source={require('../../../assets/images/arrow.png')}></Image>
-            </TouchableOpacity>
-          ))}
-        </View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Tools</Text>
+        <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')}></Image>
       </View>
+      <View style={styles.cardContainer}>
+        {cardData.map((card) => (
+          <TouchableOpacity
+            key={card.id}
+            style={styles.card}
+            onPress={() => handleCardPress(card.id)}
+          >
+            <Image source={card.image} />
+            <Text style={styles.cardTitle}>{card.title}</Text>
+            <Text style={styles.cardCategory}>{card.category}</Text>
+            <Image style={styles.cardImage} source={require('../../../assets/images/arrow.png')}></Image>
+          </TouchableOpacity>
+        ))}
+      </View>
+      {isVisible && (
+        <NavPane/>
+      )}
+    </View>
   );
 };
 
