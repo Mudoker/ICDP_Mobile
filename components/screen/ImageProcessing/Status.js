@@ -15,7 +15,7 @@ const PopupPage = ({ status, data, navigation }) => {
             <View style={styles.modalContainer}>
                 {status === true &&
                     <View style={styles.modalContent}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={closePopup}>
                             <Image style={{ width: 13, height: 13, alignSelf: 'flex-end' }} source={require('../../../assets/images/cancel.png')} />
                         </TouchableOpacity>
                         <View style={styles.imageStatusContainer}>
