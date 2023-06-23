@@ -4,7 +4,7 @@ import { View, Button, Image, Touchable, Alert, Permission, PermissionsAndroid }
 import axios from 'axios';
 import FormData from 'form-data';
 import Toast from 'react-native-toast-message';
-
+import Banner from '../Banner/Banner';
 import {requestMultiple, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 import {
@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 
 var ImagePicker = require('react-native-image-picker');
-const PhotoSelectionPage = () => {
+const PhotoSelectionPage = ({navigation}) => {
 
   // Array stores selected images from library or camera
   const [selectedImages, setSelectedImages] = useState([]);
@@ -166,18 +166,7 @@ const PhotoSelectionPage = () => {
 
   return (
     <View>
-      <View style={{ backgroundColor: '#6C56F5', height: 40 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image style={[styles.backIcon, { marginTop: 5 }]} source={require('../../../assets/images/nav.png')}></Image>
-          <Image style={[styles.backIcon, { marginTop: 10, marginLeft: 350, width: 22, height: 22 }]} source={require('../../../assets/images/setting_icon.png')}></Image>
-          <TouchableOpacity style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]} onPress={() => navigation.goBack()}>
-            
-            {/* 'V' will be replaced with the actual username */}
-            <Text style={{ color: 'white', width: 11, position: 'absolute', marginLeft: 5.5 }}>V</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <Image style={[styles.header, { marginTop: 5 }]} source={require('../../../assets/images/INAS_mobile_logo_2.png')}></Image>
-      </View>
+      <Banner navigation={navigation}/>
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
       {/* Upload IMAGE */}

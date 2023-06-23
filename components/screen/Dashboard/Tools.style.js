@@ -113,4 +113,8 @@ export const styles = StyleSheet.create({
   navBar: {
     backgroundColor: 'black',
   },
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
 });
