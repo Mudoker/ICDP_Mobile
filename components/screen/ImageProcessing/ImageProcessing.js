@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styles } from './ImageProcess.style';
 import { View, Button, Image, Touchable, Alert, Permission, PermissionsAndroid } from 'react-native';
 import axios from 'axios';
 import FormData from 'form-data';
 import Toast from 'react-native-toast-message';
 import Banner from '../Banner/Banner';
-import {requestMultiple, PERMISSIONS, RESULTS} from 'react-native-permissions';
-
+import { requestMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import Status from './Status';
 import {
   Text,
   TextInput,
@@ -19,8 +19,9 @@ import {
 } from 'react-native';
 
 var ImagePicker = require('react-native-image-picker');
-const PhotoSelectionPage = ({navigation}) => {
-
+const PhotoSelectionPage = ({ navigation }) => {
+  const [status, setStatus] = useState('');
+  const [data, setData] = useState({});
   // Array stores selected images from library or camera
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -69,7 +70,7 @@ const PhotoSelectionPage = ({navigation}) => {
           // deleteImage(image);
         }
       } catch (error) {
-        
+
       }
 
     });
@@ -145,17 +146,33 @@ const PhotoSelectionPage = ({navigation}) => {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
-        data : data
+        data: data
       };
       const payload = await axios(config);
-      console.log(payload.data);
+      data = payload.data.data[0];
+      if (Object.keys(data).length === 0) {
+        setStatus(false);
+        setData({});
+        return;
+      }
+      setStatus(true);
+      setData(data);
       return payload.data
-      
     } catch (error) {
+      setStatus(false);
       console.log('API Error:', error);
     }
   };
+  useEffect(() => {
+    if (status !== '') {
+      const timer = setTimeout(() => {
+        setStatus('');
+        setData({});
+      }, 3000);
 
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
   // Function: Delete image
   const deleteImage = (imageToDelete) => {
     // Delete a specific image from selectedImages array
@@ -166,7 +183,7 @@ const PhotoSelectionPage = ({navigation}) => {
 
   return (
     <View>
-      <Banner navigation={navigation}/>
+      <Banner navigation={navigation} />
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
       {/* Upload IMAGE */}
@@ -191,8 +208,8 @@ const PhotoSelectionPage = ({navigation}) => {
           Take a photo
         </Text>
       </TouchableOpacity>
-      <Toast />
-
+      {/* Display selected images */}
+      {status !== '' && <Status status={status} data={data} />}
     </View>
   );
 };
