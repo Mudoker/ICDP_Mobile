@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
+    constainer: {
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        // alignContent: 'center',
+        // alignSelf: 'center'
+    },
     buttonLibrary: {
         boxSizing: 'border-box',
         position: 'absolute',
@@ -49,11 +55,10 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        position: 'absolute',
-        width: 146,
+        // position: 'absolute',
         height: 56,
         left: 6,
-        top: 55,
+        // top: 55,
         // fontFamily: 'Neue Haas Grotesk Text Pro',
         fontStyle: 'normal',
         fontWeight: '700',
@@ -62,15 +67,15 @@ export const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         letterSpacing: 0.095,
-        color: '#000000',
+        color: 'black',
     },
 
     footNote: {
-        position: 'absolute',
+        // position: 'absolute',
         width: 372,
         height: 20,
         left: 6,
-        top: 85,
+        // top: 85,
         // fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '700',

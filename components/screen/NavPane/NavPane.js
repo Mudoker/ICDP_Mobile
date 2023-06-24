@@ -31,14 +31,24 @@ const NavigationMenu = ({ navigation }) => {
                     activeOpacity={1}
                 >
                     <View style={styles.modalContent}>
+                    {/* BANNER */}
                         <View style={styles.banner}>
                             <Image style={styles.bannerImage} source={require('../../../assets/images/Rectangle.png')} />
                             <View style={styles.bannerTextContainer}>
-                                <Image source={require('../../../assets/images/Ellipse.png')} style={[styles.iconImage, { marginTop: 22.5, marginLeft: 20 }]} />
+                                <Image
+                                    source={require('../../../assets/images/iconUser.png')}
+                                    style={[styles.iconImage, {
+                                        marginTop: 15,
+                                        marginLeft: 20,
+                                        width: 50,
+                                        height: 50,
+                                        borderRadius: 50
+                                    }]} />
                                 <Text style={[styles.bannerText, { marginLeft: 15 }]}>{navigation.getParam('data').email}</Text>
                             </View>
                             <Text style={[styles.footNote, { marginTop: -15, marginLeft: 88 }]}>{navigation.getParam('data').role}</Text>
                         </View>
+                    {/* Selection */}
                         <View style={{ height: Dimensions.get('window').height }}>
                             <TouchableOpacity
                                 style={styles.menuItem}
@@ -48,12 +58,6 @@ const NavigationMenu = ({ navigation }) => {
                                     <Image source={require('../../../assets/images/hatang_icon.png')} style={styles.iconImage} />
                                     <Text style={[styles.menuItemText, {marginTop:20}]}>Hạ tầng</Text>
                                 </View>
-                                <Text style={{
-                                    marginTop: 10,
-                                    width: 257,
-                                    height: 1,
-                                    backgroundColor: '#988D8D',
-                                }} />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.menuItem}
@@ -63,12 +67,6 @@ const NavigationMenu = ({ navigation }) => {
                                     <Image source={require('../../../assets/images/lichtruc.png')} style={styles.iconImage} />
                                     <Text style={styles.menuItemText}>Lịch trực</Text>
                                 </View>
-                                <Text style={{
-                                    marginTop: 10,
-                                    width: 257,
-                                    height: 1,
-                                    backgroundColor: '#988D8D',
-                                }} />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.menuItem}
@@ -78,12 +76,6 @@ const NavigationMenu = ({ navigation }) => {
                                     <Image source={require('../../../assets/images/plan.png')} style={styles.iconImage} />
                                     <Text style={styles.menuItemText}>Kế hoạch</Text>
                                 </View>
-                                <Text style={{
-                                    marginTop: 10,
-                                    width: 257,
-                                    height: 1.25,
-                                    backgroundColor: '#988D8D',
-                                }} />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={[styles.menuItem, styles.dropdownItem]}
@@ -99,23 +91,10 @@ const NavigationMenu = ({ navigation }) => {
                                 {isCongCuOpen && (
                                     <View style={styles.dropdownContent}>
                                         <TouchableOpacity style={styles.dropdownMenuItem}>
-                                            <View style={{
-                                                width: 6, // Adjust the size of the dot as needed
-                                                height: 6, // Adjust the size of the dot as needed
-                                                borderRadius: 3, // Makes the dot circular
-                                                backgroundColor: '#898080',
-
-                                            }} />
                                             <Text style={styles.dropdownMenuItemText}> Tổng quan</Text>
                                         </TouchableOpacity>
                                     </View>
                                 )}
-                                <Text style={{
-                                    marginTop: 10,
-                                    width: 257,
-                                    height: 1.25,
-                                    backgroundColor: '#988D8D',
-                                }} />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={[styles.menuItem, styles.dropdownItem]}
@@ -131,33 +110,13 @@ const NavigationMenu = ({ navigation }) => {
                                 {isKpiOpen && (
                                     <View style={styles.dropdownContent}>
                                         <TouchableOpacity style={styles.dropdownMenuItem}>
-                                            <View style={{
-                                                width: 6, // Adjust the size of the dot as needed
-                                                height: 6, // Adjust the size of the dot as needed
-                                                borderRadius: 3, // Makes the dot circular
-                                                backgroundColor: '#898080',
-
-                                            }} />
                                             <Text style={styles.dropdownMenuItemText}> Cá nhân</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.dropdownMenuItem}>
-                                            <View style={{
-                                                width: 6, // Adjust the size of the dot as needed
-                                                height: 6, // Adjust the size of the dot as needed
-                                                borderRadius: 3, // Makes the dot circular
-                                                backgroundColor: '#898080',
-
-                                            }} />
                                             <Text style={styles.dropdownMenuItemText}> Tham Chiếu</Text>
                                         </TouchableOpacity>
                                     </View>
                                 )}
-                                <Text style={{
-                                    marginTop: 10,
-                                    width: 257,
-                                    height: 1,
-                                    backgroundColor: '#988D8D',
-                                }} />
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.menuItem}
@@ -167,24 +126,12 @@ const NavigationMenu = ({ navigation }) => {
                                     <Image source={require('../../../assets/images/user_icon.png')} style={styles.iconImage} />
                                     <Text style={styles.menuItemText}>Thông tin</Text>
                                 </View>
-                                    <Text style={{
-                                        marginTop: 10,
-                                        width: 257,
-                                        height: 1.25,
-                                        backgroundColor: '#988D8D',
-                                    }} />
                             </TouchableOpacity>
 
                             <TouchableOpacity
                                 style={[styles.menuItem, { marginTop: 100 }]}
                                 onPress={() => handleMenuItemPress('Help')}
                             >
-                                <Text style={{
-                                    width: 257,
-                                    height: 1,
-                                    marginBottom: 5,
-                                    backgroundColor: '#988D8D',
-                                }} />
                                 <View style={styles.bannerTextContainer}>
                                     <Image source={require('../../../assets/images/help_icon.png')} style={styles.iconImage} />
                                     <Text style={styles.menuItemText}>Help</Text>
@@ -225,23 +172,34 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         height: '100%',
-        backgroundColor: 'white',
-        padding: 20,
+        backgroundColor: 'rgb(253, 249, 255)',
+        paddingTop: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
         borderRadius: 5,
+        borderRightColor: 'rgb(232, 223, 236)',
+        borderRightWidth: 1
     },
     menuItem: {
         paddingVertical: 10,
+        borderBottomColor: 'rgb(232, 223, 236)',
+        borderBottomWidth: 1,
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        paddingRight: 10,
+        paddingLeft: 5
     },
     menuItemText: {
         fontSize: 16,
+        paddingLeft: 8
     },
     banner: {
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        width: 260,
-        height: 90,
+        // borderBottomLeftRadius: 15,
+        // borderBottomRightRadius: 15,
+        width: 240,
+        height: 80,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
     },
@@ -264,7 +222,7 @@ const styles = StyleSheet.create({
     bannerText: {
         fontSize: 13,
         color: 'white',
-        fontWeight: '500',
+        fontWeight: '800',
         letterSpacing: 0.455,
         // fontFamily: 'Neue Haas Grotesk Text Pro',
     },
@@ -280,6 +238,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderTopWidth: 1,
         borderTopColor: '#CCCCCC',
+        // borderTopColor: 'rgb(232, 223, 236)'
     },
     dropdownMenuItem: {
         flexDirection: 'row',

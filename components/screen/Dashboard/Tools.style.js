@@ -5,15 +5,18 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    alignContent: 'center',
+    alignSelf: 'center'
   },
   cardContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'flex-start', // Align cards to the left
     marginTop: 16,
+    alignContent: 'center'
   },
   card: {
-    width: (Dimensions.get('window').width - 60) / 3, // Divide width equally for 3 items per line
+    width: (Dimensions.get('window').width - 60) / 2, // Divide width equally for 3 items per line
     height: 125,
     marginBottom: 16,
     marginHorizontal: 10,

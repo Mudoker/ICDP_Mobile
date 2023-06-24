@@ -4,37 +4,42 @@ import NavPane from '../NavPane/NavPane';
 
 const styles = StyleSheet.create({
     bannerContainer: {
-        position: 'absolute', // Set the position to absolute
+        position: 'relative', // Set the position to absolute
         top: 0,
-        left: 0,
         width: '100%',
         backgroundColor: '#6C56F5',
-        height: 40,
-        zIndex: 9999, // Set a higher zIndex value to ensure the banner is on top
+        height: 80,
+        zIndex: 99, // Set a higher zIndex value to ensure the banner is on top
+    },
+    settingIcon: {
+        position: 'absolute',
+        top: '55%',
+        left: 0,
+        zIndex: 100,
+        marginLeft: 10,
     },
     backIcon: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        width: 31,
-        height: 31,
+        top: '70%',
+        right: 0,
+        zIndex: 100,
+        marginRight: 15
     },
     navPaneContainer: {
         position: 'absolute',
-        top: 40,
+        top: '100%',
         left: 0,
-        zIndex: 9998, // Set a lower zIndex value for the NavPane
+        zIndex: 99,
     },
     header: {
         left: '50%',
         width: 78,
         height: 31,
-        marginLeft: -39,
     },
 });
 
 const Banner = ({ navigation }) => {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const slideAnimation = useState(new Animated.Value(-300))[0];
 
     const toggleVisibility = () => {
@@ -51,19 +56,25 @@ const Banner = ({ navigation }) => {
     };
     return (
         <View style={styles.bannerContainer}>
-            <TouchableOpacity onPress={toggleVisibility}>
-                <Image style={[styles.backIcon, { marginTop: 5 }]} source={require('../../../assets/images/nav.png')}></Image>
+            <Image style={[styles.settingIcon]} source={require('../../../assets/images/INAS_mobile_logo_2.png')}></Image>
+
+            {/* Menu toggle */}
+            <TouchableOpacity onPress={toggleVisibility} style={styles.backIcon}>
+            {
+                isVisible ? <Image source={require('../../../assets/images/cancel_icon.png')}></Image> : 
+                <Image source={require('../../../assets/images/nav.png')}></Image>
+            }
             </TouchableOpacity>
-            <Image style={[styles.backIcon, { marginTop: 10, marginLeft: 350, width: 22, height: 22 }]} source={require('../../../assets/images/setting_icon.png')}></Image>
             {/* Will be updated!*/}
-            <TouchableOpacity style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]} onPress={() => handlePress('Dashboard')}>
-                {/* 'V' will be replaced with the actual username */}
+            {/* <TouchableOpacity
+                style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]}
+                onPress={() => handlePress('Dashboard')}>
                 <Text style={{ color: 'white', width: 11, position: 'absolute', marginLeft: 5.5 }}>{navigation.getParam('data').email[0]}</Text>
-            </TouchableOpacity>
-            <Image style={[styles.header, { marginTop: 5 }]} source={require('../../../assets/images/INAS_mobile_logo_2.png')}></Image>
+            </TouchableOpacity> */}
             
             {isVisible && (
-                <Animated.View style={[styles.navPaneContainer ,{ transform: [{ translateX: slideAnimation }] }]}>
+                <Animated.View
+                    style={[styles.navPaneContainer, { transform: [{ translateX: slideAnimation }] }]}>
                     <NavPane navigation={navigation} />
                 </Animated.View>
             )}

@@ -24,7 +24,7 @@ const DashboardPage = ({ navigation }) => {
     { id: 7, title: 'POP', category: 'Management', image: require('../../../assets/images/pop_icon.png') },
     { id: 8, title: 'Tham chiếu', category: 'KPI', image: require('../../../assets/images/ref_icon.png') },
     { id: 9, title: 'Phân quyền', category: 'Admin', image: require('../../../assets/images/role_icon.png') },
-    { id: 10, title: 'Brach-Mb-Btht1', category: '', image: require('../../../assets/images/branch_icon.png') },
+    // { id: 10, title: 'Brach-Mb-Btht1', category: '', image: require('../../../assets/images/branch_icon.png') },
   ];
 
   const handleCardPress = (cardId) => {
@@ -39,8 +39,8 @@ const DashboardPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Banner navigation={navigation}/>
-      <View style={[styles.titleContainer, {marginTop:60}]}>
-        <Text style={styles.title}>Tools</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Các tool thường sử dụng</Text>
         <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')}></Image>
       </View>
       <View style={styles.cardContainer}>

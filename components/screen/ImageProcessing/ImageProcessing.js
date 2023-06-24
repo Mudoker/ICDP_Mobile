@@ -91,7 +91,7 @@ const PhotoSelectionPage = ({ navigation }) => {
 
     const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
     if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
-      ImagePicker.launchCamera(options, (response) => {
+      ImagePicker.launchCamera(options, async (response) => {
         if (response.didCancel) {
           console.log('User cancelled camera');
         } else if (response.error) {
@@ -200,10 +200,14 @@ const PhotoSelectionPage = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={styles.constainer}>
       <Banner navigation={navigation} />
-      <Text style={styles.title}>Đọc máy đo</Text>
-      <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
+      <Text style={styles.title}>Đọc giá trị máy đo tập điểm</Text>
+      <Text style={styles.footNote}>Vui lòng tải ảnh hoặc chụp máy đo của bạn, điều kiện:</Text>
+      <Text style={styles.footNote}> ✅ Ảnh không quá mờ</Text>
+      <Text style={styles.footNote}> ✅ Ảnh không bị chói sáng hoặc tối</Text>
+      <Text style={styles.footNote}> ✅ Ảnh không quá xa</Text>
+      <Text style={styles.footNote}> ✅ Ảnh có góc chụp nghiêng không quá 30 độ</Text>
       {/* Upload IMAGE */}
       <TouchableOpacity
         style={[styles.buttonLibrary, { top: 350 }, selectedImages.length >= MAX_IMAGES && styles.disabledButton]}

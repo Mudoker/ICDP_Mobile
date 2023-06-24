@@ -28,7 +28,7 @@ const PopupPage = ({ status, data, navigation }) => {
                             <Text style={[styles.title, { marginTop: 5 }]}>Giá trị ảnh</Text>
                             <Text style={{ fontSize: 12, fontWeight: 700, }}>{data.R} | {data.U}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Link kiểm tra</Text>
-                            <TouchableOpacity onPress={() => Linking.openURL(data.result1)}>
+                            <TouchableOpacity onPress={() => Linking.openURL(data.result2)}>
                                 <Text style={{ color: '#4EAFE5', borderBottomWidth: 1, borderBottomColor: '#4EAFE5' }}> Press here</Text>
                             </TouchableOpacity>
                         </View>
