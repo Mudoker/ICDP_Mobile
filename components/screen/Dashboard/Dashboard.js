@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, Image, Animated } from 'react-native';
 import { styles } from './Tools.style';
-import NavPane from '../NavPane/NavPane';
-const DashboardPage = () => {
+import Banner from '../Banner/Banner';
+const DashboardPage = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(true);
-
+  const slideAnimation = useState(new Animated.Value(-300))[0];
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
+    Animated.timing(slideAnimation, {
+      toValue: isVisible ? -300 : 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
   };
+
   const cardData = [
     { id: 1, title: 'Kế hoạch', category: 'Calendar', image: require('../../../assets/images/calendar_icon.png') },
     { id: 2, title: 'Tổng quan', category: 'Statistics', image: require('../../../assets/images/stat_icon.png') },
@@ -22,26 +28,18 @@ const DashboardPage = () => {
   ];
 
   const handleCardPress = (cardId) => {
-    console.log('Card Pressed:', cardId);
+    // format data
+    const convertRes = {data : navigation.getParam('data')};
+    // Will be updated! 
+    // navigation with data
+    navigation.navigate('PhotoSelectionPage',convertRes);
+    
   };
 
   return (
-    <View>
-      <View style={{ backgroundColor: '#6C56F5', height: 40 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <TouchableOpacity onPress={toggleVisibility}>
-            <Image style={[styles.backIcon, { marginTop: 5 }]} source={require('../../../assets/images/nav.png')}></Image>
-          </TouchableOpacity>
-          <Image style={[styles.backIcon, { marginTop: 10, marginLeft: 350, width: 22, height: 22 }]} source={require('../../../assets/images/setting_icon.png')}></Image>
-          <TouchableOpacity style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]} onPress={() => navigation.goBack()}>
-
-            {/* 'V' will be replaced with the actual username */}
-            <Text style={{ color: 'white', width: 11, position: 'absolute', marginLeft: 5.5 }}>V</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <Image style={[styles.header, { marginTop: 5 }]} source={require('../../../assets/images/INAS_mobile_logo_2.png')}></Image>
-      </View>
-      <View style={styles.titleContainer}>
+    <View style={styles.container}>
+      <Banner navigation={navigation}/>
+      <View style={[styles.titleContainer, {marginTop:60}]}>
         <Text style={styles.title}>Tools</Text>
         <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')}></Image>
       </View>
@@ -59,9 +57,6 @@ const DashboardPage = () => {
           </TouchableOpacity>
         ))}
       </View>
-      {isVisible && (
-        <NavPane/>
-      )}
     </View>
   );
 };

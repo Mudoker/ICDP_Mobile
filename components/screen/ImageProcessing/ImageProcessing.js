@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styles } from './ImageProcess.style';
 import { View, Button, Image, Touchable, Alert, Permission, PermissionsAndroid } from 'react-native';
 import axios from 'axios';
 import FormData from 'form-data';
 import Toast from 'react-native-toast-message';
-
-import {requestMultiple, PERMISSIONS, RESULTS} from 'react-native-permissions';
-
+import Banner from '../Banner/Banner';
+import { requestMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import Status from './Status';
 import {
   Text,
   TextInput,
@@ -19,8 +19,9 @@ import {
 } from 'react-native';
 
 var ImagePicker = require('react-native-image-picker');
-const PhotoSelectionPage = () => {
-
+const PhotoSelectionPage = ({ navigation }) => {
+  const [status, setStatus] = useState('');
+  const [data, setData] = useState({});
   // Array stores selected images from library or camera
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -69,7 +70,7 @@ const PhotoSelectionPage = () => {
           // deleteImage(image);
         }
       } catch (error) {
-        
+
       }
 
     });
@@ -145,17 +146,33 @@ const PhotoSelectionPage = () => {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
-        data : data
+        data: data
       };
       const payload = await axios(config);
-      console.log(payload.data);
+      data = payload.data.data[0];
+      if (Object.keys(data).length === 0) {
+        setStatus(false);
+        setData({});
+        return;
+      }
+      setStatus(true);
+      setData(data);
       return payload.data
-      
     } catch (error) {
+      setStatus(false);
       console.log('API Error:', error);
     }
   };
+  useEffect(() => {
+    if (status !== '') {
+      const timer = setTimeout(() => {
+        setStatus('');
+        setData({});
+      }, 3000);
 
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
   // Function: Delete image
   const deleteImage = (imageToDelete) => {
     // Delete a specific image from selectedImages array
@@ -166,18 +183,7 @@ const PhotoSelectionPage = () => {
 
   return (
     <View>
-      <View style={{ backgroundColor: '#6C56F5', height: 40 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image style={[styles.backIcon, { marginTop: 5 }]} source={require('../../../assets/images/nav.png')}></Image>
-          <Image style={[styles.backIcon, { marginTop: 10, marginLeft: 350, width: 22, height: 22 }]} source={require('../../../assets/images/setting_icon.png')}></Image>
-          <TouchableOpacity style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]} onPress={() => navigation.goBack()}>
-            
-            {/* 'V' will be replaced with the actual username */}
-            <Text style={{ color: 'white', width: 11, position: 'absolute', marginLeft: 5.5 }}>V</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <Image style={[styles.header, { marginTop: 5 }]} source={require('../../../assets/images/INAS_mobile_logo_2.png')}></Image>
-      </View>
+      <Banner navigation={navigation} />
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
       {/* Upload IMAGE */}
@@ -202,8 +208,8 @@ const PhotoSelectionPage = () => {
           Take a photo
         </Text>
       </TouchableOpacity>
-      <Toast />
-
+      {/* Display selected images */}
+      {status !== '' && <Status status={status} data={data} />}
     </View>
   );
 };

@@ -116,12 +116,13 @@ export default function Login({ navigation }) {
           }, ToastAndroid.SHORT);
         } else {
           const convertRes = JSON.parse(res);
-          console.log('**************', convertRes);
+          console.log('**************', convertRes.data);
           Toast.show({
             type: 'success',
             text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
           });
           setTxtButtonLogin(TXT_OTP);
+          navigation.navigate('Dashboard', convertRes);
         }
       }
       setOtp(prev => !prev)
@@ -213,18 +214,18 @@ export default function Login({ navigation }) {
                 
                 {/* Form OPT input */}
                 <View style={styles.otpContainer}>
-                  {otp ? <OTPView setOtpInput={setOtpInput} /> : null}
+                  {otp ? <OTPView  autoFocus={true} setOtpInput={setOtpInput} /> : null}
                 </View>
                 {/* Button đăng nhập */}
                 <View style={styles.buttonContainer}>
-                  <TouchableOpacity style={styles.button} onPress={onPressLogin}>
+                  <TouchableOpacity style={[styles.button, { top: otp ? 40 + 20 : 20 }]} onPress={onPressLogin}>
                     <Text style={styles.buttonText}>
                       {txtButtonLogin}
                     </Text>
                   </TouchableOpacity>
 
                   {/* Help */}
-                  <View style={styles.helpTextContainer}>
+                  <View style={[styles.helpTextContainer, { top: otp ? 40 + 20 : 20 }]}>
                     <Text style={styles.helpText}><View style={styles.stroke} />Trợ giúp<View style={styles.stroke} /></Text>
                     <Text style={styles.funcText}>GỬI LẠI MÃ OTP</Text>
                     <Text style={styles.funcText}>KHÔNG THỂ ĐĂNG NHẬP?</Text>

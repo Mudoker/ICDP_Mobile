@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
         width: 146,
         height: 56,
         left: 6,
-        top: 39,
+        top: 55,
         // fontFamily: 'Neue Haas Grotesk Text Pro',
         fontStyle: 'normal',
         fontWeight: '700',

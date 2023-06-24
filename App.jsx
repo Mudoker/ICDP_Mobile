@@ -14,6 +14,8 @@ import Dashboard from './components/screen/Dashboard/Dashboard';
 import { AuthContext } from './components/Context/AuthContext';
 import Navigator from './components/routes/homeStack'
 import NavPane from './components/screen/NavPane/NavPane';
+import Banner from './components/screen/Banner/Banner';
+import Status from './components/screen/ImageProcessing/Status';
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -100,8 +102,11 @@ const App = () => {
     //   </NavigationContainer>
     // </AuthContext.Provider>
     // <Dashboard/>
-    <PhotoSelectionPage/>
-    // <Navigator />
+    // <PhotoSelectionPage/>
+    // <Dashboard/>
+    <Navigator />
+    // <Status></Status>
+    // <Banner/>
     // // <NavPane/>
     // <AuthContext.Provider value={authContext}>
     //   <NavigationContainer>
