@@ -26,7 +26,7 @@ const PopupPage = ({ status, data, navigation }) => {
                         <View style={styles.dateContainer}>
                             <Text style={styles.title}>{formattedDate}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Giá trị ảnh</Text>
-                            <Text style={{ fontSize: 12, fontFamily: 'Roboto', fontWeight: '700', }}>{data.R} | {data.U}</Text>
+                            <Text style={{ fontSize: 12, fontWeight: 700, }}>{data.R} | {data.U}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Link kiểm tra</Text>
                             <TouchableOpacity onPress={() => Linking.openURL(data.result1)}>
                                 <Text style={{ color: '#4EAFE5', borderBottomWidth: 1, borderBottomColor: '#4EAFE5' }}> Press here</Text>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         marginBottom: 10,
         fontWeight: '700',
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         color: 'black',
     },
     divider: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     title: {
         color: 'black',
         fontSize: 13,
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontWeight: '700',
         textAlign: 'left',
     },

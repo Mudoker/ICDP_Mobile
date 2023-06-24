@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
   },
   footNote: {
     // fontFamily: 'Neue Haas Grotesk Text Pro',
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 10,
     top: -30,
     letterSpacing: 0.035,
@@ -166,7 +166,7 @@ export const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     color: 'white',
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: 10,
   },
   authorContainer: {

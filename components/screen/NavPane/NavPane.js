@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '500',
         letterSpacing: 0.455,
-        fontFamily: 'Neue Haas Grotesk Text Pro',
+        // fontFamily: 'Neue Haas Grotesk Text Pro',
     },
     dropdownItem: {
         position: 'relative',
@@ -300,8 +300,8 @@ const styles = StyleSheet.create({
     },
     footNote: {
         fontSize: 10,
-        fontFamily: 'Neue Haas Grotesk Text Pro',
-        fontWeight: 500,
+        // fontFamily: 'Neue Haas Grotesk Text Pro',
+        fontWeight: '500',
         letterSpacing: 0.35,
         color: 'white',
     },

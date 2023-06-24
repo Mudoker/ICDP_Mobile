@@ -35,8 +35,8 @@ const PhotoSelectionPage = ({ navigation }) => {
     const options = {
       title: 'Select Photo',
       mediaType: 'photo',
-      maxWidth: 500,
-      maxHeight: 500,
+      maxWidth: '500',
+      maxHeight: '500',
       // Highest quality
       // quality: 1,
       multiple: true,
@@ -82,8 +82,8 @@ const PhotoSelectionPage = ({ navigation }) => {
     const options = {
       title: 'Take Photo',
       // mediaType: 'photo',
-      maxWidth: 500,
-      maxHeight: 500,
+      maxWidth: '500',
+      maxHeight: '500',
       // includeBase64: true,
       // Highest quality
       // quality: 1,
