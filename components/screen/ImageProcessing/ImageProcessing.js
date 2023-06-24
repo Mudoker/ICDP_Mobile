@@ -5,7 +5,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import Toast from 'react-native-toast-message';
 import Banner from '../Banner/Banner';
-import { requestMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { requestMultiple, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import Status from './Status';
 import {
   Text,
@@ -89,35 +89,53 @@ const PhotoSelectionPage = ({ navigation }) => {
       // quality: 1,
     };
 
-    ImagePicker.launchCamera(options, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled camera');
-      } else if (response.error) {
-        console.log('Camera Error: ', response.error);
-      } else {
+    const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
+    if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
+      ImagePicker.launchCamera(options, (response) => {
+        if (response.didCancel) {
+          console.log('User cancelled camera');
+        } else if (response.error) {
+          console.log('Camera Error: ', response.error);
+        } else {
 
-        // Add image to selectedImages array
-        const newImage = {
-          uri: response.uri || response.assets[0]?.uri,
-          // Custom file name
-          name: `image_${Date.now()}`,
-        };
-        console.log(newImage);
-        setSelectedImages((prevImages) => [...prevImages, newImage]);
+          // Add image to selectedImages array
+          const newImage = {
+            uri: response.uri || response.assets[0]?.uri,
+            // Custom file name
+            name: `image_${Date.now()}`,
+          };
+          console.log(newImage);
+          setSelectedImages((prevImages) => [...prevImages, newImage]);
 
-        // Trigger API call for the image and delete it after API call
-        callAPIVer2(newImage, () => {
-          deleteImage(newImage);
-        });
-      }
-    });
-    // const rq = await request('camera', { type: 'always' });
-    // console.log(rq);
-    // const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
-    // if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
-    //   const payload = await ImagePicker.launchCamera(options);
-    //   console.log(payload);
-    // }
+          // Trigger API call for the image and delete it after API call
+          callAPIVer2(newImage, () => {
+            deleteImage(newImage);
+          });
+        }
+      });
+    }
+    // ImagePicker.launchCamera(options, (response) => {
+    //   if (response.didCancel) {
+    //     console.log('User cancelled camera');
+    //   } else if (response.error) {
+    //     console.log('Camera Error: ', response.error);
+    //   } else {
+
+    //     // Add image to selectedImages array
+    //     const newImage = {
+    //       uri: response.uri || response.assets[0]?.uri,
+    //       // Custom file name
+    //       name: `image_${Date.now()}`,
+    //     };
+    //     console.log(newImage);
+    //     setSelectedImages((prevImages) => [...prevImages, newImage]);
+
+    //     // Trigger API call for the image and delete it after API call
+    //     callAPIVer2(newImage, () => {
+    //       deleteImage(newImage);
+    //     });
+    //   }
+    // });
   };
 
   const callAPIVer2 = async (image) => {
