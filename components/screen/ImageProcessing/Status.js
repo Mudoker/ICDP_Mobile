@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Image, Linking, Button } from 'react-native';
 
-const PopupPage = ({ status, data, navigation }) => {
+const PopupPage = ({ status, data, navigation, user }) => {
     const [isVisible, setIsVisible] = useState(true);
 
     const closePopup = () => {
         setIsVisible(false);
     };
+
+    const onNavigate = () => {
+        // format data
+    const convertRes = {data : navigation.getParam('data'), image: data};
+    // Will be updated! 
+    // navigation with data
+    navigation.navigate('ResultPage',convertRes);
+    }
     const currentDate = new Date();
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
     const formattedDate = currentDate.toLocaleString('vi-VN', options);
@@ -28,7 +36,7 @@ const PopupPage = ({ status, data, navigation }) => {
                             <Text style={[styles.title, { marginTop: 5 }]}>Giá trị ảnh</Text>
                             <Text style={{ fontSize: 12, fontWeight: 700, }}>{data.R} | {data.U}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Link kiểm tra</Text>
-                            <TouchableOpacity onPress={() => Linking.openURL(data.result2)}>
+                            <TouchableOpacity onPress={onNavigate()}>
                                 <Text style={{ color: '#4EAFE5', borderBottomWidth: 1, borderBottomColor: '#4EAFE5' }}> Press here</Text>
                             </TouchableOpacity>
                         </View>
@@ -39,7 +47,7 @@ const PopupPage = ({ status, data, navigation }) => {
                 }
                 {status === false &&
                     <View style={styles.modalContent}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={closePopup}>
                             <Image style={{ width: 13, height: 13, alignSelf: 'flex-end' }} source={require('../../../assets/images/cancel.png')} />
                         </TouchableOpacity>
                         <View style={styles.imageStatusContainer}>

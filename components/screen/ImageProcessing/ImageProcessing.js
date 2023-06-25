@@ -5,8 +5,9 @@ import axios from 'axios';
 import FormData from 'form-data';
 import Toast from 'react-native-toast-message';
 import Banner from '../Banner/Banner';
-import { requestMultiple, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
+import { requestMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Status from './Status';
+import Loader from '../Loader/Loader';
 import {
   Text,
   TextInput,
@@ -22,6 +23,7 @@ var ImagePicker = require('react-native-image-picker');
 const PhotoSelectionPage = ({ navigation }) => {
   const [status, setStatus] = useState('');
   const [data, setData] = useState({});
+  const [isLoad, setLoad] = useState(false);
   // Array stores selected images from library or camera
   const [selectedImages, setSelectedImages] = useState([]);
 
@@ -35,8 +37,8 @@ const PhotoSelectionPage = ({ navigation }) => {
     const options = {
       title: 'Select Photo',
       mediaType: 'photo',
-      maxWidth: '500',
-      maxHeight: '500',
+      maxWidth: 500,
+      maxHeight: 500,
       // Highest quality
       // quality: 1,
       multiple: true,
@@ -82,64 +84,47 @@ const PhotoSelectionPage = ({ navigation }) => {
     const options = {
       title: 'Take Photo',
       // mediaType: 'photo',
-      maxWidth: '500',
-      maxHeight: '500',
+      maxWidth: 500,
+      maxHeight: 500,
       // includeBase64: true,
       // Highest quality
       // quality: 1,
     };
 
-    const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
-    if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
-      ImagePicker.launchCamera(options, async (response) => {
-        if (response.didCancel) {
-          console.log('User cancelled camera');
-        } else if (response.error) {
-          console.log('Camera Error: ', response.error);
-        } else {
+    ImagePicker.launchCamera(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled camera');
+      } else if (response.error) {
+        console.log('Camera Error: ', response.error);
+      } else {
 
-          // Add image to selectedImages array
-          const newImage = {
-            uri: response.uri || response.assets[0]?.uri,
-            // Custom file name
-            name: `image_${Date.now()}`,
-          };
-          console.log(newImage);
-          setSelectedImages((prevImages) => [...prevImages, newImage]);
+        // Add image to selectedImages array
+        const newImage = {
+          uri: response.uri || response.assets[0]?.uri,
+          // Custom file name
+          name: `image_${Date.now()}`,
+        };
+        console.log(newImage);
+        setSelectedImages((prevImages) => [...prevImages, newImage]);
 
-          // Trigger API call for the image and delete it after API call
-          callAPIVer2(newImage, () => {
-            deleteImage(newImage);
-          });
-        }
-      });
-    }
-    // ImagePicker.launchCamera(options, (response) => {
-    //   if (response.didCancel) {
-    //     console.log('User cancelled camera');
-    //   } else if (response.error) {
-    //     console.log('Camera Error: ', response.error);
-    //   } else {
-
-    //     // Add image to selectedImages array
-    //     const newImage = {
-    //       uri: response.uri || response.assets[0]?.uri,
-    //       // Custom file name
-    //       name: `image_${Date.now()}`,
-    //     };
-    //     console.log(newImage);
-    //     setSelectedImages((prevImages) => [...prevImages, newImage]);
-
-    //     // Trigger API call for the image and delete it after API call
-    //     callAPIVer2(newImage, () => {
-    //       deleteImage(newImage);
-    //     });
-    //   }
-    // });
+        // Trigger API call for the image and delete it after API call
+        callAPIVer2(newImage, () => {
+          deleteImage(newImage);
+        });
+      }
+    });
+    // const rq = await request('camera', { type: 'always' });
+    // console.log(rq);
+    // const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
+    // if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
+    //   const payload = await ImagePicker.launchCamera(options);
+    //   console.log(payload);
+    // }
   };
 
   const callAPIVer2 = async (image) => {
     try {
+      setLoad(true);
       let data = new FormData();
       if (Array.isArray(image)) {
         image.forEach(element => {
@@ -169,14 +154,17 @@ const PhotoSelectionPage = ({ navigation }) => {
       const payload = await axios(config);
       data = payload.data.data[0];
       if (Object.keys(data).length === 0) {
+        setLoad(false);
         setStatus(false);
         setData({});
         return;
       }
+      setLoad(false);
       setStatus(true);
       setData(data);
       return payload.data
     } catch (error) {
+      setLoad(false);
       setStatus(false);
       console.log('API Error:', error);
     }
@@ -200,14 +188,10 @@ const PhotoSelectionPage = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.constainer}>
+    <View>
       <Banner navigation={navigation} />
-      <Text style={styles.title}>Đọc giá trị máy đo tập điểm</Text>
-      <Text style={styles.footNote}>Vui lòng tải ảnh hoặc chụp máy đo của bạn, điều kiện:</Text>
-      <Text style={styles.footNote}> ✅ Ảnh không quá mờ</Text>
-      <Text style={styles.footNote}> ✅ Ảnh không bị chói sáng hoặc tối</Text>
-      <Text style={styles.footNote}> ✅ Ảnh không quá xa</Text>
-      <Text style={styles.footNote}> ✅ Ảnh có góc chụp nghiêng không quá 30 độ</Text>
+      <Text style={styles.title}>Đọc máy đo</Text>
+      <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
       {/* Upload IMAGE */}
       <TouchableOpacity
         style={[styles.buttonLibrary, { top: 350 }, selectedImages.length >= MAX_IMAGES && styles.disabledButton]}
@@ -231,9 +215,11 @@ const PhotoSelectionPage = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
       {/* Display selected images */}
-      {status !== '' && <Status status={status} data={data} />}
+      {status !== '' && <Status status={status} data={data} navigation={navigation}/>}
+      {isLoad !== false && <Loader status={isLoad} />}
     </View>
   );
 };
 
 export default PhotoSelectionPage;
+
