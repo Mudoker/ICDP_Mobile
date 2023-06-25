@@ -16,6 +16,8 @@ import Navigator from './components/routes/homeStack'
 import NavPane from './components/screen/NavPane/NavPane';
 import Banner from './components/screen/Banner/Banner';
 import Status from './components/screen/ImageProcessing/Status';
+import Loader from './components/screen/Loader/Loader';
+import Result from './components/screen/ResultPage/ResultPage';
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -103,6 +105,7 @@ const App = () => {
     // </AuthContext.Provider>
     // <Dashboard/>
     // <PhotoSelectionPage/>
+    // <Result/>
     // <Dashboard/>
     <Navigator />
     // <Status></Status>
@@ -123,6 +126,7 @@ const App = () => {
     //     )}
     //   </NavigationContainer>
     // </AuthContext.Provider>
+    // <Loader></Loader>
   );
 };
 
