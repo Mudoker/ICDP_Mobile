@@ -1,19 +1,24 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
+  scrollDashboard: {
+    // ! Card 2 column
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   cardContainer: {
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'flex-start', // Align cards to the left
+    alignContent: 'center',
     marginTop: 16,
-    alignContent: 'center'
   },
   card: {
     width: (Dimensions.get('window').width - 60) / 2, // Divide width equally for 3 items per line

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, Image, Animated } from 'react-native';
+import { View, TouchableOpacity, Text, Image, Animated, ScrollView } from 'react-native';
 import { styles } from './Tools.style';
 import Banner from '../Banner/Banner';
 const DashboardPage = ({ navigation }) => {
@@ -24,7 +24,6 @@ const DashboardPage = ({ navigation }) => {
     { id: 7, title: 'POP', category: 'Management', image: require('../../../assets/images/pop_icon.png') },
     { id: 8, title: 'Tham chiếu', category: 'KPI', image: require('../../../assets/images/ref_icon.png') },
     { id: 9, title: 'Phân quyền', category: 'Admin', image: require('../../../assets/images/role_icon.png') },
-    // { id: 10, title: 'Brach-Mb-Btht1', category: '', image: require('../../../assets/images/branch_icon.png') },
   ];
 
   const handleCardPress = (cardId) => {
@@ -43,6 +42,9 @@ const DashboardPage = ({ navigation }) => {
         <Text style={styles.title}>Các tool thường sử dụng</Text>
         <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')}></Image>
       </View>
+      {/* Center align card */}
+      <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+      style={styles.scrollDashboard}>
       <View style={styles.cardContainer}>
         {cardData.map((card) => (
           <TouchableOpacity
@@ -57,7 +59,9 @@ const DashboardPage = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
+      </ScrollView>
     </View>
+    
   );
 };
 
