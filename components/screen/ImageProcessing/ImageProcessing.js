@@ -160,46 +160,46 @@ const PhotoSelectionPage = ({ navigation }) => {
       const payload = await axios(config);
       data = payload.data.data[0];
       if (Object.keys(data).length === 0 || payload.data.data[0].class !== 'ok') {
-        setOption('fail');
-        setLoad(true);
-        setTimeout(() => {
-          setLoad(false);
-          setStatus(false);
-          setData({});
-          // Trigger API call for the image and delete it after API call
-        }, 3800);
+        // setOption('fail');
+        // setLoad(true);
+        setStatus(false);
+        // setTimeout(() => {
+        //   // setLoad(false);
+        //   // Trigger API call for the image and delete it after API call
+        // }, 3800);
+        setData({});
         return;
       }
-      setOption('success');
-      setLoad(true);
-      setTimeout(() => {
-        setLoad(false);
-        setStatus(true);
-        setData(data);
-        // Trigger API call for the image and delete it after API call
-      }, 3800);
+      // setOption('success');
+      // setLoad(true);
+      // setTimeout(() => {
+      //   setLoad(false);
+      //   // Trigger API call for the image and delete it after API call
+      // }, 3800);
+      setStatus(true);
+      setData(data);
       return payload.data
     } catch (error) {
-      setOption('fail');
-      setLoad(true);
-      setTimeout(() => {
-        setLoad(false);
-        setStatus(false);
-        // Trigger API call for the image and delete it after API call
-      }, 3800);
+      // setOption('fail');
+      // setLoad(true);
+      // setTimeout(() => {
+      //   setLoad(false);
+      //   // Trigger API call for the image and delete it after API call
+      // }, 3800);
+      setStatus(false);
       console.log('API Error:', error);
     }
   };
-  useEffect(() => {
-    if (status !== '') {
-      const timer = setTimeout(() => {
-        setStatus('');
-        setData({});
-      }, 3800);
+  // useEffect(() => {
+  //   if (status !== '') {
+  //     const timer = setTimeout(() => {
+  //       setStatus('');
+  //       setData({});
+  //     }, 3800);
 
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [status]);
   // Function: Delete image
   const deleteImage = (imageToDelete) => {
     // Delete a specific image from selectedImages array
@@ -236,9 +236,8 @@ const PhotoSelectionPage = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
       {/* Display selected images */}
-      {status !== '' && <Status status={status} data={data} navigation={navigation} />}
       {isLoad !== false && <Loader status={isLoad} option={option} />}
-
+      {status !== '' && <Status status={status} data={data} navigation={navigation} />}
     </View>
   );
 };

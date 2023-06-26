@@ -128,7 +128,7 @@ export default function Login({ navigation }) {
           setTimeout(() => {
             setLoad(false);     // Trigger API call for the image and delete it after API call
             navigation.navigate('Dashboard', convertRes);
-          }, 1500);
+          }, 4000);
         }
       }
       setOtp(prev => !prev)

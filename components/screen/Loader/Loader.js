@@ -15,7 +15,7 @@ const PopupPage = ({ status = true, data, navigation, option = 'scan' }) => {
                     <View style={styles.modalContent}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
-                            style={{ width: 60, height: 60 }}
+                            style={{ width: 200, height: 200 }}
                             source={require('../../../assets/images/image_scan.gif')}
                         />
                     </View>}
@@ -23,26 +23,26 @@ const PopupPage = ({ status = true, data, navigation, option = 'scan' }) => {
                     <View style={styles.modalContent}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
-                            style={{ width: 60, height: 60 }}
+                            style={{ width: 250, height: 250 }}
                             source={require('../../../assets/images/loading.gif')}
                         />
                     </View>}
-                {status === true && option === 'success' &&
+                {/* {status === true && option === 'success' &&
                     <View style={styles.modalContent}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
-                            style={{ width: 80, height: 80 }}
+                            style={{ width: 200, height: 200 }}
                             source={require('../../../assets/images/scanning_successful.gif')}
                         />
-                    </View>}
-                {status === true && option === 'fail' &&
+                    </View>} */}
+                {/* {status === true && option === 'fail' &&
                     <View style={styles.modalContent}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
-                            style={{ width: 80, height: 80 }}
+                            style={{ width: 200, height: 200 }}
                             source={require('../../../assets/images/scanning_fail.gif')}
                         />
-                    </View>}
+                    </View>} */}
             </View>
         </Modal>
     );
@@ -78,14 +78,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
-        width: 155,
-        height: 65,
+        width: '97%',
+        height: '65%',
         backgroundColor: 'white',
         padding: 20,
         borderRadius: 5,
         justifyContent: 'center', // Align content to the left
         alignItems: 'center',
-        borderRadius: 20,
     },
     imageStatusContainer: {
         alignItems: 'center',
