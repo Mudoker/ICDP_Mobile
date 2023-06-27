@@ -1,23 +1,62 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Image, Linking, Button } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
-const PopupPage = ({ status = true, data, navigation }) => {
+const PopupPage = ({ status = true, data, navigation, option = 'scan' }) => {
     const currentDate = new Date();
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
     const formattedDate = currentDate.toLocaleString('vi-VN', options);
+    const [key, setKey] = useState(0); // Add state for the key
+
     return (
-        <Modal animationType="slide" transparent={true} >
+        <Modal animationType="none" transparent={true} >
             <View style={styles.modalContainer}>
-                {status === true &&
-                <View style={styles.modalContent}>
-                    <Image style={{ width: 45, height: 45}} source={require('../../../assets/images/loader.png')} />
-                </View>}
+                {status === true && option === 'scan' &&
+                    <View style={styles.modalContent}>
+                        <FastImage
+                            key={`${option}_${key}`} // Use key prop with option and key value
+                            style={{ width: 200, height: 200 }}
+                            source={require('../../../assets/images/image_scan.gif')}
+                        />
+                    </View>}
+                {status === true && option === 'loading' &&
+                    <View style={styles.modalContent}>
+                        <FastImage
+                            key={`${option}_${key}`} // Use key prop with option and key value
+                            style={{ width: 250, height: 250 }}
+                            source={require('../../../assets/images/loading.gif')}
+                        />
+                    </View>}
+                {/* {status === true && option === 'success' &&
+                    <View style={styles.modalContent}>
+                        <FastImage
+                            key={`${option}_${key}`} // Use key prop with option and key value
+                            style={{ width: 200, height: 200 }}
+                            source={require('../../../assets/images/scanning_successful.gif')}
+                        />
+                    </View>} */}
+                {/* {status === true && option === 'fail' &&
+                    <View style={styles.modalContent}>
+                        <FastImage
+                            key={`${option}_${key}`} // Use key prop with option and key value
+                            style={{ width: 200, height: 200 }}
+                            source={require('../../../assets/images/scanning_fail.gif')}
+                        />
+                    </View>} */}
             </View>
         </Modal>
     );
 };
 
 const styles = StyleSheet.create({
+    // Other style definitions...
+
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -39,14 +78,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
-        width: 155,
-        height: 65,
+        width: '97%',
+        height: '65%',
         backgroundColor: 'white',
         padding: 20,
         borderRadius: 5,
         justifyContent: 'center', // Align content to the left
         alignItems: 'center',
-        borderRadius: 20,
     },
     imageStatusContainer: {
         alignItems: 'center',
@@ -115,6 +153,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         marginTop: 10,
     }
+    // Other style definitions...
 });
 
 export default PopupPage;

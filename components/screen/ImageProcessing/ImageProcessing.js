@@ -8,6 +8,7 @@ import Banner from '../Banner/Banner';
 import { requestMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Status from './Status';
 import Loader from '../Loader/Loader';
+// import MaskLoader, { MaskLoaderType } from 'react-native-mask-loader';
 import {
   Text,
   TextInput,
@@ -22,6 +23,7 @@ import {
 var ImagePicker = require('react-native-image-picker');
 const PhotoSelectionPage = ({ navigation }) => {
   const [status, setStatus] = useState('');
+  const [option, setOption] = useState('loading');
   const [data, setData] = useState({});
   const [isLoad, setLoad] = useState(false);
   // Array stores selected images from library or camera
@@ -105,12 +107,17 @@ const PhotoSelectionPage = ({ navigation }) => {
           name: `image_${Date.now()}`,
         };
         console.log(newImage);
+        setOption('scan');
+        setLoad(true);
         setSelectedImages((prevImages) => [...prevImages, newImage]);
-
-        // Trigger API call for the image and delete it after API call
-        callAPIVer2(newImage, () => {
-          deleteImage(newImage);
-        });
+        // Set isLoad back to false after 1 second
+        setTimeout(() => {
+          setLoad(false);
+          // Trigger API call for the image and delete it after API call
+          callAPIVer2(newImage, () => {
+            deleteImage(newImage);
+          });
+        }, 3800);
       }
     });
     // const rq = await request('camera', { type: 'always' });
@@ -124,7 +131,6 @@ const PhotoSelectionPage = ({ navigation }) => {
 
   const callAPIVer2 = async (image) => {
     try {
-      setLoad(true);
       let data = new FormData();
       if (Array.isArray(image)) {
         image.forEach(element => {
@@ -153,32 +159,47 @@ const PhotoSelectionPage = ({ navigation }) => {
       };
       const payload = await axios(config);
       data = payload.data.data[0];
-      if (Object.keys(data).length === 0) {
-        setLoad(false);
+      if (Object.keys(data).length === 0 || payload.data.data[0].class !== 'ok') {
+        // setOption('fail');
+        // setLoad(true);
         setStatus(false);
+        // setTimeout(() => {
+        //   // setLoad(false);
+        //   // Trigger API call for the image and delete it after API call
+        // }, 3800);
         setData({});
         return;
       }
-      setLoad(false);
+      // setOption('success');
+      // setLoad(true);
+      // setTimeout(() => {
+      //   setLoad(false);
+      //   // Trigger API call for the image and delete it after API call
+      // }, 3800);
       setStatus(true);
       setData(data);
       return payload.data
     } catch (error) {
-      setLoad(false);
+      // setOption('fail');
+      // setLoad(true);
+      // setTimeout(() => {
+      //   setLoad(false);
+      //   // Trigger API call for the image and delete it after API call
+      // }, 3800);
       setStatus(false);
       console.log('API Error:', error);
     }
   };
-  useEffect(() => {
-    if (status !== '') {
-      const timer = setTimeout(() => {
-        setStatus('');
-        setData({});
-      }, 3000);
+  // useEffect(() => {
+  //   if (status !== '') {
+  //     const timer = setTimeout(() => {
+  //       setStatus('');
+  //       setData({});
+  //     }, 3800);
 
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [status]);
   // Function: Delete image
   const deleteImage = (imageToDelete) => {
     // Delete a specific image from selectedImages array
@@ -189,7 +210,7 @@ const PhotoSelectionPage = ({ navigation }) => {
 
   return (
     <View>
-      <Banner navigation={navigation} />
+      {/* <Banner navigation={navigation} /> */}
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
       {/* Upload IMAGE */}
@@ -215,8 +236,8 @@ const PhotoSelectionPage = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
       {/* Display selected images */}
-      {status !== '' && <Status status={status} data={data} navigation={navigation}/>}
-      {isLoad !== false && <Loader status={isLoad} />}
+      {isLoad !== false && <Loader status={isLoad} option={option} />}
+      {status !== '' && <Status status={status} data={data} navigation={navigation} />}
     </View>
   );
 };

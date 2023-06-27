@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Toast from 'react-native-toast-message';
-
+import Loader from '../Loader/Loader';
 import {
   Text,
   View,
@@ -45,7 +45,8 @@ export default function Login({ navigation }) {
   const [otpInput, setOtpInput] = React.useState('');
   const [visible, setVisible] = React.useState(false);
   const [snackBarText, setSnackBarText] = React.useState('');
-
+  const [isLoad, setLoad] = useState(false);
+  const [option, setOption] = useState('loading');
   const [txtButtonLogin, setTxtButtonLogin] = React.useState(TXT_OTP);
 
   // const {signIn} = React.useContext(AuthContext);
@@ -122,7 +123,12 @@ export default function Login({ navigation }) {
             text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
           });
           setTxtButtonLogin(TXT_OTP);
-          navigation.navigate('Dashboard', convertRes);
+          setOption('loading');
+          setLoad(true);
+          setTimeout(() => {
+            setLoad(false);     // Trigger API call for the image and delete it after API call
+            navigation.navigate('Dashboard', convertRes);
+          }, 4000);
         }
       }
       setOtp(prev => !prev)
@@ -176,62 +182,62 @@ export default function Login({ navigation }) {
       end={{ x: 1, y: 1 }}
     >
       <SafeAreaView style={[styles.container, { paddingTop: 120 }]}>
-      <Toast />
-      {/* <KeyboardAvoidingView
+        <Toast />
+        {/* <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}> */}
         <Text style={styles.title}>FTEL - KTKT - INF MN</Text>
         <StatusBar barStyle="light-content" />
-        
-          <TouchableWithoutFeedback
-            style={styles.container}
-            accessible={true}
-            onPress={Keyboard.dismiss}>
-            <View style={styles.logoContainer}>
-              <View style={styles.wrapLogo}>
-                <Image
-                  style={styles.logo}
-                  source={require('../../../assets/images/INAS_mobile_logo.png')}
-                />
+
+        <TouchableWithoutFeedback
+          style={styles.container}
+          accessible={true}
+          onPress={Keyboard.dismiss}>
+          <View style={styles.logoContainer}>
+            <View style={styles.wrapLogo}>
+              <Image
+                style={styles.logo}
+                source={require('../../../assets/images/INAS_mobile_logo.png')}
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <Text style={styles.notifyContainer}>
+                Welcome to ICDP App
+              </Text>
+              <Text style={styles.footNote}>Hướng dẫn đăng nhập hệ thống <Text style={styles.footNoteLink} >Tại đây</Text> </Text>
+              <TextInput
+
+                style={styles.input}
+                placeholder="Email ID"
+                placeholderTextColor="rgb(80, 78, 112)"
+                keyboardType="email-address"
+                returnKeyType="next"
+                autoCorrect={false}
+                onChangeText={value => textInputChange(value)}
+                onSubmitEditing={() => inputPasswordRef.current.focus()}
+              />
+              <Image style={styles.icon} source={require('../../../assets/images/email_icon.png')} />
+
+              {/* Form OPT input */}
+              <View style={styles.otpContainer}>
+                {otp ? <OTPView autoFocus={true} setOtpInput={setOtpInput} /> : null}
               </View>
-              <View style={styles.infoContainer}>
-                <Text style={styles.notifyContainer}>
-                  Welcome to ICDP App
-                </Text>
-                <Text style={styles.footNote}>Hướng dẫn đăng nhập hệ thống <Text style={styles.footNoteLink} >Tại đây</Text> </Text>
-                <TextInput
-                  
-                  style={styles.input}
-                  placeholder="Email ID"
-                  placeholderTextColor="rgb(80, 78, 112)"
-                  keyboardType="email-address"
-                  returnKeyType="next"
-                  autoCorrect={false}
-                  onChangeText={value => textInputChange(value)}
-                  onSubmitEditing={() => inputPasswordRef.current.focus()}
-                />
-                <Image style={styles.icon} source={require('../../../assets/images/email_icon.png')} />
-                
-                {/* Form OPT input */}
-                <View style={styles.otpContainer}>
-                  {otp ? <OTPView  autoFocus={true} setOtpInput={setOtpInput} /> : null}
+              {/* Button đăng nhập */}
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity style={[styles.button, { top: otp ? 40 + 20 : 20 }]} onPress={onPressLogin}>
+                  <Text style={styles.buttonText}>
+                    {txtButtonLogin}
+                  </Text>
+                </TouchableOpacity>
+
+                {/* Help */}
+                <View style={[styles.helpTextContainer, { top: otp ? 40 + 20 : 20 }]}>
+                  <Text style={styles.helpText}><View style={styles.stroke} />Trợ giúp<View style={styles.stroke} /></Text>
+                  <Text style={styles.funcText}>GỬI LẠI MÃ OTP</Text>
+                  <Text style={styles.funcText}>KHÔNG THỂ ĐĂNG NHẬP?</Text>
                 </View>
-                {/* Button đăng nhập */}
-                <View style={styles.buttonContainer}>
-                  <TouchableOpacity style={[styles.button, { top: otp ? 40 + 20 : 20 }]} onPress={onPressLogin}>
-                    <Text style={styles.buttonText}>
-                      {txtButtonLogin}
-                    </Text>
-                  </TouchableOpacity>
 
-                  {/* Help */}
-                  <View style={[styles.helpTextContainer, { top: otp ? 40 + 20 : 20 }]}>
-                    <Text style={styles.helpText}><View style={styles.stroke} />Trợ giúp<View style={styles.stroke} /></Text>
-                    <Text style={styles.funcText}>GỬI LẠI MÃ OTP</Text>
-                    <Text style={styles.funcText}>KHÔNG THỂ ĐĂNG NHẬP?</Text>
-                  </View>
-
-                  {/* <TouchableOpacity
+                {/* <TouchableOpacity
                     style={!getOtp ? styles.button : styles.buttonDisabled}
                     disabled={getOtp}
                     onPress={onGetOTP}>
@@ -251,24 +257,25 @@ export default function Login({ navigation }) {
                       ) : null}
                     </Text>
                   </TouchableOpacity> */}
-                </View>
               </View>
-              <Image style={styles.authorContainer} source={require('../../../assets/images/foot_image.png')}></Image>
-              <Snackbar
-                visible={visible}
-                duration={2000}
-                onDismiss={onDismissSnackBar}
-                wrapperStyle={{ top: -120 }}
-                style={{ borderRadius: 30, height: 10 }}
-                action={{
-                  label: 'Ok!',
-                  onPress: () => { },
-                }}>
-              </Snackbar>
             </View>
-          </TouchableWithoutFeedback>
+            <Image style={styles.authorContainer} source={require('../../../assets/images/foot_image.png')}></Image>
+            <Snackbar
+              visible={visible}
+              duration={2000}
+              onDismiss={onDismissSnackBar}
+              wrapperStyle={{ top: -120 }}
+              style={{ borderRadius: 30, height: 10 }}
+              action={{
+                label: 'Ok!',
+                onPress: () => { },
+              }}>
+            </Snackbar>
+          </View>
+        </TouchableWithoutFeedback>
         {/* </KeyboardAvoidingView> */}
       </SafeAreaView>
+      {isLoad !== false && <Loader status={isLoad} option={option} />}
     </LinearGradient>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Image, Linking, Button } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 const PopupPage = ({ status, data, navigation, user }) => {
     const [isVisible, setIsVisible] = useState(true);
@@ -10,10 +11,10 @@ const PopupPage = ({ status, data, navigation, user }) => {
 
     const onNavigate = () => {
         // format data
-    const convertRes = {data : navigation.getParam('data'), image: data};
-    // Will be updated! 
-    // navigation with data
-    navigation.navigate('ResultPage',convertRes);
+        const convertRes = { data: navigation.getParam('data'), image: data };
+        // Will be updated! 
+        // navigation with data
+        navigation.navigate('ResultPage', convertRes);
     }
     const currentDate = new Date();
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -27,7 +28,11 @@ const PopupPage = ({ status, data, navigation, user }) => {
                             <Image style={{ width: 13, height: 13, alignSelf: 'flex-end' }} source={require('../../../assets/images/cancel.png')} />
                         </TouchableOpacity>
                         <View style={styles.imageStatusContainer}>
-                            <Image source={require('../../../assets/images/success.png')} style={styles.image} />
+                            {/* <Image source={require('../../../assets/images/success.png')} style={styles.image} /> */}
+                            <FastImage
+                                style={{ width: 200, height: 200 }}
+                                source={require('../../../assets/images/scanning_successful.gif')}
+                            />
                             <Text style={styles.modalText}>Quét thành công</Text>
                         </View>
                         <Text style={styles.divider} />
@@ -36,7 +41,7 @@ const PopupPage = ({ status, data, navigation, user }) => {
                             <Text style={[styles.title, { marginTop: 5 }]}>Giá trị ảnh</Text>
                             <Text style={{ fontSize: 12, fontWeight: 700, }}>{data.R} | {data.U}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Link kiểm tra</Text>
-                            <TouchableOpacity onPress={onNavigate()}>
+                            <TouchableOpacity>
                                 <Text style={{ color: '#4EAFE5', borderBottomWidth: 1, borderBottomColor: '#4EAFE5' }}> Press here</Text>
                             </TouchableOpacity>
                         </View>
@@ -51,9 +56,14 @@ const PopupPage = ({ status, data, navigation, user }) => {
                             <Image style={{ width: 13, height: 13, alignSelf: 'flex-end' }} source={require('../../../assets/images/cancel.png')} />
                         </TouchableOpacity>
                         <View style={styles.imageStatusContainer}>
-                            <Image source={require('../../../assets/images/fail.png')} style={styles.image} />
+                            {/* <Image source={require('../../../assets/images/fail.png')} style={styles.image} /> */}
+                            <FastImage
+                                // key={`${option}_${key}`} // Use key prop with option and key value
+                                style={{ width: 200, height: 200 }}
+                                source={require('../../../assets/images/scanning_fail.gif')}
+                            />
                             <Text style={styles.modalText}>'Quét thất bại'</Text>
-                            <Text>Lỗi trong quá trình quét đã được phát hiện. Vui lòng thực hiện lại. Nếu vẫn còn lỗi, chọn Get More Help. </Text>
+                            <Text style={{ marginBottom: 30 }}>Lỗi trong quá trình quét đã được phát hiện. Vui lòng thực hiện lại. Nếu vẫn còn lỗi, chọn Get More Help. </Text>
                             <TouchableOpacity onPress={closePopup}>
                                 <Text style={styles.button1}>Return home</Text>
                             </TouchableOpacity>
@@ -90,13 +100,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
-        width: 271,
-        height: 265,
+        width: '95%',
+        height: '65%',
         backgroundColor: 'white',
         padding: 20,
         borderRadius: 5,
         justifyContent: 'flex-start', // Align content to the left
-        borderRadius: 20,
+        // borderRadius: 20,
     },
     imageStatusContainer: {
         alignItems: 'center',
@@ -146,8 +156,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#4EAFE5',
         borderRadius: 7,
-        width: 80,
-        height: 29,
+        width: 200,
+        height: 50,
         fontSize: 11,
         textAlign: 'center',
         textAlignVertical: 'center',
@@ -158,8 +168,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#4EAFE5',
         borderRadius: 7,
-        width: 80,
-        height: 29,
+        width: 200,
+        height: 50,
         fontSize: 11,
         textAlign: 'center',
         textAlignVertical: 'center',
