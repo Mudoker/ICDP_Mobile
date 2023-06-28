@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
-    constainer: {
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // alignContent: 'center',
-        // alignSelf: 'center'
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignSelf: 'center'
     },
     buttonLibrary: {
         boxSizing: 'border-box',
@@ -69,12 +69,25 @@ export const styles = StyleSheet.create({
         letterSpacing: 0.095,
         color: 'black',
     },
-
+    footNoteTitle: {
+        width: 372,
+        height: 20,
+        left: 6,
+        fontWeight: '800',
+        fontSize: 14,
+        lineHeight: 16,
+        display: 'flex',
+        alignItems: 'center',
+        letterSpacing: 0.095,
+        marginBottom: 10,
+        color: 'red',
+        // textDecorationLine: 'underline',
+    },
     footNote: {
         // position: 'absolute',
         width: 372,
         height: 20,
-        left: 6,
+        left: 25,
         // top: 85,
         // fontFamily: 'Roboto',
         fontStyle: 'normal',
@@ -103,5 +116,11 @@ export const styles = StyleSheet.create({
 
     navBar: {
         backgroundColor: 'black',
+    },
+    cancelViewPhoto: {
+        position: 'absolute',
+        top: 90,
+        right: 15,
+        zIndex: 10000000
     }
 })

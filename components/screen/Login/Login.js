@@ -17,14 +17,12 @@ import {
 } from 'react-native';
 
 import { delay } from '../../../utils/helpers.utils';
-import { CountDownText } from 'react-native-countdown-timer-text';
 import OTPView from '../OTP/OTPView.js';
 import { fetchAPI, login } from '../../../utils/api.utils';
 import { Snackbar } from 'react-native-paper';
 
 // import {AuthContext} from '../Context/AuthContext';
 import { styles } from './login.style';
-import { ImageBackground } from 'react-native';
 export default function Login({ navigation }) {
 
   const TXT_OTP = 'OTP';

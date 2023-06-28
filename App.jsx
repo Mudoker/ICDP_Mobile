@@ -104,10 +104,10 @@ const App = () => {
     //   </NavigationContainer>
     // </AuthContext.Provider>
     // <Dashboard/>
-    <PhotoSelectionPage/>
+    // <PhotoSelectionPage/>
     // <Result/>
     // <Dashboard/>
-    // <Navigator />
+    <Navigator />
     // <Status></Status>
     // <Banner/>
     // // <NavPane/>

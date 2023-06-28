@@ -9,36 +9,40 @@ export const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   cardContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start', // Align cards to the left
-    marginTop: 16,
-    alignContent: 'center'
+    marginTop: 10,
+    alignContent: 'center',
+    width: '100%'
   },
   card: {
-    width: (Dimensions.get('window').width - 60) / 2, // Divide width equally for 3 items per line
-    height: 125,
+    top: 0,
+    width: (Dimensions.get('window').width - 45) / 2, // Divide width equally for 3 items per line
+    height: 320,
     marginBottom: 16,
     marginHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFF',
-    borderRadius: 9.154,
-    borderWidth: 1.716,
-    borderColor: '#0665A5',
-    shadowColor: '#000',
+    alignItems: 'flex-start', // Căng lề trai chữ trong card
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#808890',
     shadowOffset: {
       width: 0,
       height: 4.57704496383667,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 4.57704496383667,
-    elevation: 5,
+    // shadowRadius: 4.57704496383667,
+    // elevation: 5,
   },
   cardTitle: {
     fontSize: 13,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  cardCategory: {
+    paddingLeft: 5,
+    paddingBottom: 5,
+    textAlign: 'left',
   },
   buttonLibrary: {
     boxSizing: 'border-box',
@@ -89,8 +93,10 @@ export const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 20
   },
   title: {
+    marginTop: 5,
     marginLeft: 8,
     fontStyle: 'normal',
     fontWeight: '700',
@@ -119,5 +125,5 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-  },
+  }
 });

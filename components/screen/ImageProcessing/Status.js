@@ -3,19 +3,20 @@ import { View, Text, Modal, TouchableOpacity, StyleSheet, Image, Linking, Button
 import FastImage from 'react-native-fast-image';
 
 const PopupPage = ({ status, data, navigation, user }) => {
+    console.log('STATUS', status);
     const [isVisible, setIsVisible] = useState(true);
 
     const closePopup = () => {
         setIsVisible(false);
     };
 
-    const onNavigate = () => {
-        // format data
-        const convertRes = { data: navigation.getParam('data'), image: data };
-        // Will be updated! 
-        // navigation with data
-        navigation.navigate('ResultPage', convertRes);
-    }
+    // const onNavigate = () => {
+    //     // format data
+    //     const convertRes = { data: navigation.getParam('data'), image: data };
+    //     // Will be updated! 
+    //     // navigation with data
+    //     navigation.navigate('ResultPage', convertRes);
+    // }
     const currentDate = new Date();
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
     const formattedDate = currentDate.toLocaleString('vi-VN', options);

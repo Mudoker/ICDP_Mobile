@@ -44,9 +44,9 @@ const NavigationMenu = ({ navigation }) => {
                                         height: 50,
                                         borderRadius: 50
                                     }]} />
-                                <Text style={[styles.bannerText, { marginLeft: 15 }]}>{navigation.getParam('data').email}</Text>
+                                <Text style={[styles.bannerText, { marginLeft: 15 }]}>{navigation.getParam('data')?.email}</Text>
                             </View>
-                            <Text style={[styles.footNote, { marginTop: -15, marginLeft: 88 }]}>{navigation.getParam('data').role}</Text>
+                            <Text style={[styles.footNote, { marginTop: -15, marginLeft: 88 }]}>{navigation.getParam('data')?.role}</Text>
                         </View>
                     {/* Selection */}
                         <View style={{ height: Dimensions.get('window').height }}>
