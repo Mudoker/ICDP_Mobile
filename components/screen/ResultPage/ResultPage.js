@@ -33,7 +33,7 @@ const ResultPage = ({ navigation }) => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-      {/* <Banner navigation={navigation.getParam('navigation')} /> */}
+      <Banner navigation={navigation.getParam('navigation')} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Kết quả</Text>
         <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')} />
