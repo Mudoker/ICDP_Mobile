@@ -177,6 +177,7 @@ const PhotoSelectionPage = ({ navigation }) => {
       }
       return payload.data;
     } catch (error) {
+      setStatus('');
       setStatus(false);
       console.log('API Error:', error);
     }
