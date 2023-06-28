@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Banner from '../Banner/Banner';
-import { View, TouchableOpacity, Text, Image, Modal } from 'react-native';
+import { View, TouchableOpacity, Text, Image, Modal, TouchableWithoutFeedback } from 'react-native';
 import { styles } from './ResultPage.style';
 
 const ResultPage = ({ navigation }) => {
@@ -18,15 +18,21 @@ const ResultPage = ({ navigation }) => {
     navigation.navigate('PhotoSelectionPage');
   };
 
+  const closeModal = () => {
+    setIsVisible(false);
+  };
+
   return (
     <View style={styles.container}>
-        <Modal visible={isVisible} transparent={true} >
+      <Modal visible={isVisible} transparent={true}>
+        <TouchableWithoutFeedback onPress={closeModal}>
           <View style={styles.modalContainer}>
-            <TouchableOpacity onPress={() => setIsVisible(false)}>
+            <TouchableOpacity onPress={() => setIsVisible(true)}>
               <Image source={{ uri: urlPhoto }} style={{ width: 350, height: 350 }} />
             </TouchableOpacity>
           </View>
-        </Modal>
+        </TouchableWithoutFeedback>
+      </Modal>
       <Banner navigation={navigation.getParam('navigation')} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Kết quả</Text>

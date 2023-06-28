@@ -30,7 +30,7 @@ const PhotoSelectionPage = ({ navigation }) => {
   const [selectedImages, setSelectedImages] = useState([]);
 
   // Maximum number of images can be selected at a time
-  const MAX_IMAGES = 1;
+  const MAX_IMAGES = 5;
 
   // Function: Choose photo from library
   const handleChoosePhoto = async () => {
@@ -61,28 +61,27 @@ const PhotoSelectionPage = ({ navigation }) => {
             // If File name is not available -> generate a custom file name
             name: asset.fileName || `image_${Date.now()}`,
           }));
+          console.log(newImages);
           setSelectedImages((prevImages) => [...prevImages, ...newImages]);
 
           // Trigger API call for each image and delete it after API call
-
           setOption('process');
           setLoad(true);
           // Set isLoad back to false after 1 second
           setTimeout(() => {
             setLoad(false);
-            callAPIVer2(newImages)
+            callAPIVer2(newImages, () => {
+              deleteImage(newImages);
+            });
             // Toast.show({
             //   type: 'success',
             //   text1: `Kết quả: R = ${resultLCD?.data[0]?.R}; V = ${resultLCD?.data[0]?.U}`,
             // });
           }, 3800);
-
-          // deleteImage(image);
         }
       } catch (error) {
-
+        console.log(error);
       }
-
     });
   };
 
@@ -105,16 +104,15 @@ const PhotoSelectionPage = ({ navigation }) => {
       } else if (response.error) {
         console.log('Camera Error: ', response.error);
       } else {
-
         // Add image to selectedImages array
         const newImage = {
           uri: response.uri || response.assets[0]?.uri,
           // Custom file name
           name: `image_${Date.now()}`,
         };
-        console.log(newImage);
         setOption('scan');
         setLoad(true);
+        console.log(newImage);
         setSelectedImages((prevImages) => [...prevImages, newImage]);
         // Set isLoad back to false after 1 second
         setTimeout(() => {
@@ -126,13 +124,6 @@ const PhotoSelectionPage = ({ navigation }) => {
         }, 3800);
       }
     });
-    // const rq = await request('camera', { type: 'always' });
-    // console.log(rq);
-    // const granted = await requestMultiple([PERMISSIONS.IOS.CAMERA]);
-    // if (granted['ios.permission.CAMERA'] === RESULTS.GRANTED) {
-    //   const payload = await ImagePicker.launchCamera(options);
-    //   console.log(payload);
-    // }
   };
 
   const callAPIVer2 = async (image) => {
@@ -166,62 +157,41 @@ const PhotoSelectionPage = ({ navigation }) => {
       const payload = await axios(config);
       data = payload.data.data;
       if (Object.keys(data).length === 0 || payload.data.data[0].class !== 'ok') {
-        // setOption('fail');
-        // setLoad(true);
+        setStatus('');
         setStatus(false);
-        // setTimeout(() => {
-        //   // setLoad(false);
-        //   // Trigger API call for the image and delete it after API call
-        // }, 3800);
         setData({});
         return;
       } else if (Object.keys(data).length === 1) {
+        setStatus('');
         setData(data);
         setStatus(true);
       } else {
         setStatus('');
         setData(data);
+        setStatus('ok');
         // format data
         const convertRes = { datas: data, navigation: navigation };
         // Will be updated! 
         // navigation with data
         navigation.navigate('ResultPage', convertRes);
       }
-      // setOption('success');
-      // setLoad(true);
-      // setTimeout(() => {
-      //   setLoad(false);
-      //   // Trigger API call for the image and delete it after API call
-      // }, 3800);
-
-      return payload.data
+      return payload.data;
     } catch (error) {
-      // setOption('fail');
-      // setLoad(true);
-      // setTimeout(() => {
-      //   setLoad(false);
-      //   // Trigger API call for the image and delete it after API call
-      // }, 3800);
+      setStatus('');
       setStatus(false);
       console.log('API Error:', error);
     }
   };
-  // useEffect(() => {
-  //   if (status !== '') {
-  //     const timer = setTimeout(() => {
-  //       setStatus('');
-  //       setData({});
-  //     }, 3800);
 
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [status]);
   // Function: Delete image
   const deleteImage = (imageToDelete) => {
     // Delete a specific image from selectedImages array
     setSelectedImages((prevImages) =>
       prevImages.filter((image) => image.uri !== imageToDelete.uri)
     );
+    // Reset status and data when an image is deleted
+    setStatus('');
+    setData({});
   };
 
   return (
@@ -265,10 +235,9 @@ const PhotoSelectionPage = ({ navigation }) => {
       </TouchableOpacity>
       {/* Display selected images */}
       {isLoad !== false && <Loader status={isLoad} option={option} />}
-      {status !== '' && <Status status={status} data={data} navigation={navigation} />}
+      {status !== '' && <Status status={status} data={data} navigation={navigation} isVisible={true} />}
     </View>
   );
 };
 
 export default PhotoSelectionPage;
-
