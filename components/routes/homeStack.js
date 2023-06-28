@@ -41,7 +41,7 @@ const screens = {
       headerShown: false, // Hide the screen title
     },
   },
-    Status: {
+  Status: {
     screen: Status,
     navigationOptions: {
       headerShown: false, // Hide the screen title

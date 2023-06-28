@@ -4,12 +4,4 @@ module.exports = {
     ios: {},
     android: {},
   },
-  dependencies: {
-    'react-native-permission': {
-         platforms: {
-           android: null
-        },
-    },
-
-  },
 }

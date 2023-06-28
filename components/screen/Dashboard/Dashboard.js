@@ -17,16 +17,17 @@ const DashboardPage = ({ navigation }) => {
   const cardData = [
     { id: 1, title: 'Kế hoạch', category: 'Calendar', image: require('../../../assets/images/calendar_icon.png') },
     { id: 2, title: 'Tổng quan', category: 'Statistics', image: require('../../../assets/images/stat_icon.png') },
-    { id: 3, title: 'Thông tin', category: 'Tool', image: require('../../../assets/images/info_icon.png') },
+    { id: 3, title: 'Thông tin', category: 'KPI', image: require('../../../assets/images/info_icon.png') },
     { id: 4, title: 'Nhiệt độ', category: 'Management', image: require('../../../assets/images/temp_icon.png') },
     { id: 5, title: 'Thiết bị', category: 'Management', image: require('../../../assets/images/device_icon.png') },
-    { id: 6, title: 'Tool', category: 'Xử lý ảnh', image: require('../../../assets/images/hr_icon.png') },
+    { id: 6, title: 'Nhân sự', category: 'KPI', image: require('../../../assets/images/hr_icon.png') },
     { id: 7, title: 'POP', category: 'Management', image: require('../../../assets/images/pop_icon.png') },
     { id: 8, title: 'Tham chiếu', category: 'KPI', image: require('../../../assets/images/ref_icon.png') },
     { id: 9, title: 'Phân quyền', category: 'Admin', image: require('../../../assets/images/role_icon.png') },
   ];
 
   const handleCardPress = (cardId) => {
+    console.log('Card ID: ', cardId)
     // format data
     const convertRes = {data : navigation.getParam('data')};
     // Will be updated! 
