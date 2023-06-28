@@ -10,6 +10,12 @@ import Status from '../screen/ImageProcessing/Status';
 import ResultPage from '../screen/ResultPage/ResultPage';
 const screens = {
   // Register screens
+  // PhotoSelectionPage: {
+  //   screen: PhotoSelectionPage,
+  //   navigationOptions: {
+  //     headerShown: false, // Hide the screen title
+  //   },
+  // },
   Login: {
     screen: Login,
     navigationOptions: {
