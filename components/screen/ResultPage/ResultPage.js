@@ -14,6 +14,9 @@ const ResultPage = ({ navigation }) => {
     setUrlPhoto(url);
   };
 
+  const onCancel = () => {
+    navigation.navigate('PhotoSelectionPage')
+  }
   return (
     <View style={styles.container}>
       {/* <ImageView
@@ -29,9 +32,13 @@ const ResultPage = ({ navigation }) => {
             onClose={() => { setIsVisible(false) }}
             /> */}
       <Banner navigation={navigation.getParam('navigation')} />
+
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Kết quả </Text>
         <Image style={styles.icon} source={require('../../../assets/images/light_bulb.png')}></Image>
+        <TouchableOpacity onPress={onCancel} style={{ position: 'absolute', right: 10, top: 10 }}>
+          <Image style={{ width: 30, height: 30 }} source={require('../../../assets/images/cancel.png')} />
+        </TouchableOpacity>
       </View>
       <View style={styles.cardContainer}>
         {cardData.map((card) => (
