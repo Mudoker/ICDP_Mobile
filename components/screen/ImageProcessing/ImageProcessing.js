@@ -5,9 +5,9 @@ import axios from 'axios';
 import FormData, { on } from 'form-data';
 import Toast from 'react-native-toast-message';
 import Banner from '../Banner/Banner';
-import { requestMultiple, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Status from './Status';
 import Loader from '../Loader/Loader';
+import FastImage from 'react-native-fast-image';
 // import MaskLoader, { MaskLoaderType } from 'react-native-mask-loader';
 import {
   Text,
@@ -225,10 +225,14 @@ const PhotoSelectionPage = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={{ backgroundColor: 'white', height: '100%' }}>
       <Banner navigation={navigation} />
       <Text style={styles.title}>Đọc máy đo</Text>
-      <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
+      <Text style={styles.footNoteTitle}>⚠️ Điều kiện hình ảnh:</Text>
+      <Text style={styles.footNote}>✅ Ảnh không quá mờ.</Text>
+      <Text style={styles.footNote}>✅ Ảnh không bị chói sáng hoặc quá tối.</Text>
+      <Text style={styles.footNote}>✅ Ảnh chụp màn hình máy đo đủ khoảng cách, không quá xa hoặc quá gần.</Text>
+      <Text style={styles.footNote}>✅ Ảnh chụp có góc nghiêng không quá 30 độ.</Text>
       {/* Upload IMAGE */}
       <TouchableOpacity
         style={[styles.buttonLibrary, { top: 350 }, selectedImages.length >= MAX_IMAGES && styles.disabledButton]}
@@ -250,6 +254,14 @@ const PhotoSelectionPage = ({ navigation }) => {
         <Text style={styles.buttonText}>
           Take a photo
         </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[{ top: 580, boxSizing: 'border-box', position: 'absolute', left: '50%', marginLeft: -124, }]}
+      >
+        <FastImage
+          style={{ width: 250, height: 250, alignSelf: 'center', }}
+          source={require('../../../assets/images/robot.gif')}
+        />
       </TouchableOpacity>
       {/* Display selected images */}
       {isLoad !== false && <Loader status={isLoad} option={option} />}

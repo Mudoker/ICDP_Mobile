@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Banner from '../Banner/Banner';
-import { View, TouchableOpacity, Text, Image, ImageView } from 'react-native';
+import { View, TouchableOpacity, Text, Image } from 'react-native';
 // import ImageView from 'react-native-image-view';
 import { styles } from './ResultPage.style';
 
@@ -19,7 +19,8 @@ const ResultPage = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
-      {/* <ImageView
+    {/* <TouchableOpacity>
+      <ImageView
               images={[
               {
                   source: {uri: urlPhoto},
@@ -28,9 +29,10 @@ const ResultPage = ({ navigation }) => {
                   height: 720,
               },
             ]}
-            isVisible={isVisible ? true : false}
-            onClose={() => { setIsVisible(false) }}
-            /> */}
+            isVisible={isVisible}
+            onClose={() => setIsVisible(false)}
+            />
+            </TouchableOpacity> */}
       <Banner navigation={navigation.getParam('navigation')} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Kết quả </Text>
