@@ -3,20 +3,20 @@ import { View, Text, Modal, TouchableOpacity, StyleSheet, Image, Linking, Button
 import FastImage from 'react-native-fast-image';
 
 const PopupPage = ({ status, data, navigation, user }) => {
-    console.log('STATUS', status);
     const [isVisible, setIsVisible] = useState(true);
 
     const closePopup = () => {
+        status = '';
         setIsVisible(false);
     };
 
-    // const onNavigate = () => {
-    //     // format data
-    //     const convertRes = { data: navigation.getParam('data'), image: data };
-    //     // Will be updated! 
-    //     // navigation with data
-    //     navigation.navigate('ResultPage', convertRes);
-    // }
+    const onNavigate = () => {
+        // format data
+        const convertRes = { datas: data, navigation: navigation };
+        // Will be updated! 
+        // navigation with data
+        navigation.navigate('ResultPage', convertRes);
+    }
     const currentDate = new Date();
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' };
     const formattedDate = currentDate.toLocaleString('vi-VN', options);
@@ -40,9 +40,9 @@ const PopupPage = ({ status, data, navigation, user }) => {
                         <View style={styles.dateContainer}>
                             <Text style={styles.title}>{formattedDate}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Giá trị ảnh</Text>
-                            <Text style={{ fontSize: 12, fontWeight: 700, }}>{data.R} | {data.U}</Text>
+                            <Text style={{ fontSize: 12, fontWeight: 700, }}>{data[0].R} | {data[0].U}</Text>
                             <Text style={[styles.title, { marginTop: 5 }]}>Link kiểm tra</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={onNavigate}>
                                 <Text style={{ color: '#4EAFE5', borderBottomWidth: 1, borderBottomColor: '#4EAFE5' }}> Press here</Text>
                             </TouchableOpacity>
                         </View>
@@ -179,3 +179,4 @@ const styles = StyleSheet.create({
 });
 
 export default PopupPage;
+

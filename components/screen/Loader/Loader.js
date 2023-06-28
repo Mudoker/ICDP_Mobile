@@ -27,14 +27,14 @@ const PopupPage = ({ status = true, data, navigation, option = 'scan' }) => {
                             source={require('../../../assets/images/loading.gif')}
                         />
                     </View>}
-                {/* {status === true && option === 'success' &&
+                {status === true && option === 'process' &&
                     <View style={styles.modalContent}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
                             style={{ width: 200, height: 200 }}
-                            source={require('../../../assets/images/scanning_successful.gif')}
+                            source={require('../../../assets/images/document_processing.gif')}
                         />
-                    </View>} */}
+                    </View>}
                 {/* {status === true && option === 'fail' &&
                     <View style={styles.modalContent}>
                         <FastImage

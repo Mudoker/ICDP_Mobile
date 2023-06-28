@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         top: 0,
         width: '100%',
         backgroundColor: '#6C56F5',
-        height: 85,
+        height: 80,
         zIndex: 99, // Set a higher zIndex value to ensure the banner is on top
     },
     settingIcon: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     backIcon: {
         position: 'absolute',
-        top: '65%',
+        top: '70%',
         right: 0,
         zIndex: 100,
         marginRight: 15
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
 });
 
 const Banner = ({ navigation }) => {
-    console.log('navigation banner', navigation);
     const [isVisible, setIsVisible] = useState(false);
     const slideAnimation = useState(new Animated.Value(-300))[0];
 
@@ -62,10 +61,16 @@ const Banner = ({ navigation }) => {
             {/* Menu toggle */}
             <TouchableOpacity onPress={toggleVisibility} style={styles.backIcon}>
             {
-                isVisible ? <Image style={{height: 21, width: 21}} source={require('../../../assets/images/cancel_icon.png')}></Image> : 
-                <Image style={{height: 23, width: 23}} source={require('../../../assets/images/nav.png')}></Image>
+                isVisible ? <Image source={require('../../../assets/images/cancel_icon.png')}></Image> : 
+                <Image source={require('../../../assets/images/nav.png')}></Image>
             }
             </TouchableOpacity>
+            {/* Will be updated!*/}
+            {/* <TouchableOpacity
+                style={[styles.backIcon, { backgroundColor: '#F53030', borderRadius: 11, marginTop: 10, marginLeft: 390, width: 22, height: 22 }]}
+                onPress={() => handlePress('Dashboard')}>
+                <Text style={{ color: 'white', width: 11, position: 'absolute', marginLeft: 5.5 }}>{navigation.getParam('data').email[0]}</Text>
+            </TouchableOpacity> */}
             
             {isVisible && (
                 <Animated.View

@@ -35,53 +35,16 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
-	<dict>
-		<key>YOUR-PURPOSE-KEY</key>
-		<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	</dict>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSMotionUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSRemindersUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSSiriUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Playball.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string></string>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -94,5 +57,47 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	 <key>NSAppleMusicUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSCameraUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSContactsUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSFaceIDUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+  <dict>
+    <key>YOUR-PURPOSE-KEY</key>
+    <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  </dict>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSMotionUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSRemindersUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSSiriUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
+  <key>NSUserTrackingUsageDescription</key>
+  <string>ICDP App muốn sử dụng Cammera của bạn. Vui lòng chấp nhận để TIẾP TỤC.</string>
 </dict>
 </plist>
