@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Image, Linking, Button } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 const PopupPage = ({ status, data, navigation, user }) => {
     const [isVisible, setIsVisible] = useState(true);
 
+    useEffect(() => {
+        setIsVisible(status === true || status === false);
+    }, [status]);
+
     const closePopup = () => {
-        status = '';
         setIsVisible(false);
     };
-
     const onNavigate = () => {
         // format data
         const convertRes = { datas: data, navigation: navigation };

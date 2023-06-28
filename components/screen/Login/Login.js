@@ -118,17 +118,35 @@ export default function Login({ navigation }) {
         } else {
           const convertRes = JSON.parse(res);
           console.log('**************', convertRes.data);
-          Toast.show({
-            type: 'success',
-            text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
-          });
           setTxtButtonLogin(TXT_OTP);
           setOption('loading');
           setLoad(true);
-          setTimeout(() => {
-            setLoad(false);     // Trigger API call for the image and delete it after API call
+
+          let secondTimeout; // Declare a variable to hold the second timeout
+
+          let timeOut = setTimeout(() => {
+            setLoad(false);
+
+            setTimeout(() => {
+              Toast.show({
+                type: 'success',
+                text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
+                onHide: () => {
+                  navigation.navigate('Dashboard', convertRes);
+                },
+                duration: 500,
+              });
+            }, 500); // Wait for 500ms before showing the Toast
+          }, 4000); // Wait for 4 seconds before setting `setLoad(false)`
+
+          // Function to cancel the second timeout and navigate
+          const cancelTimeoutAndNavigate = () => {
+            clearTimeout(timeOut);
             navigation.navigate('Dashboard', convertRes);
-          }, 4000);
+          };
+
+          // Start a timer to call the cancelTimeoutAndNavigate function after 500ms
+          setTimeout(cancelTimeoutAndNavigate, 5000);
         }
       }
       setOtp(prev => !prev)
