@@ -195,7 +195,7 @@ const PhotoSelectionPage = ({ navigation }) => {
 
   return (
     <View style={{ backgroundColor: 'white', height: '100%' }}>
-      {/* <Banner navigation={navigation} /> */}
+      <Banner navigation={navigation} />
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNoteTitle}>⚠️ Điều kiện hình ảnh:</Text>
       <Text style={styles.footNote}>✅ Ảnh không quá mờ.</Text>
