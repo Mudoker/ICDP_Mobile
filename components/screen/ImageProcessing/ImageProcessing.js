@@ -226,7 +226,7 @@ const PhotoSelectionPage = ({ navigation }) => {
 
   return (
     <View>
-      {/* <Banner navigation={navigation} /> */}
+      <Banner navigation={navigation} />
       <Text style={styles.title}>Đọc máy đo</Text>
       <Text style={styles.footNote}>Bạn vui lòng chọn một trong hai để sử dụng hiệu quả.</Text>
       {/* Upload IMAGE */}
