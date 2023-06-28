@@ -69,7 +69,20 @@ export const styles = StyleSheet.create({
         letterSpacing: 0.095,
         color: 'black',
     },
-
+    footNoteTitle: {
+        width: 372,
+        height: 20,
+        left: 6,
+        fontWeight: '800',
+        fontSize: 14,
+        lineHeight: 16,
+        display: 'flex',
+        alignItems: 'center',
+        letterSpacing: 0.095,
+        marginBottom: 10,
+        color: 'red',
+        // textDecorationLine: 'underline',
+    },
     footNote: {
         // position: 'absolute',
         width: 372,
@@ -85,6 +98,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         letterSpacing: 0.095,
         color: '#898080',
+        paddingLeft: 15
     },
     header: {
         left: '50%',
