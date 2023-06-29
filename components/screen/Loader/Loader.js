@@ -23,15 +23,16 @@ const PopupPage = ({ status = true, data, navigation, option = 'scan' }) => {
                     <View style={styles.modalContent}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
-                            style={{ width: 250, height: 250 }}
+                            style={{ width: 300, height: 300 }}
                             source={require('../../../assets/images/loading.gif')}
                         />
+                        <Text style={[styles.modalText, { position: 'absolute', top: '65%', alignSelf: 'center' }]}>Loading...</Text>
                     </View>}
                 {status === true && option === 'process' &&
-                    <View style={styles.modalContent}>
+                    <View style={[styles.modalContent, { backgroundColor: 'white', height: '60%', opacity: 0.9 }]}>
                         <FastImage
                             key={`${option}_${key}`} // Use key prop with option and key value
-                            style={{ width: 200, height: 200 }}
+                            style={{ width: 400, height: 400 }}
                             source={require('../../../assets/images/document_processing.gif')}
                         />
                     </View>}
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     container: {
         flex: 1,
@@ -75,13 +75,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        // backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
-        width: '97%',
-        height: '65%',
-        backgroundColor: 'white',
-        padding: 20,
+        width: '90%',
+        height: '55%',
+        backgroundColor: '#ebebe8',
+        opacity: 0.85,
+        padding: 10,
         borderRadius: 5,
         justifyContent: 'center', // Align content to the left
         alignItems: 'center',
@@ -96,16 +97,14 @@ const styles = StyleSheet.create({
     },
     modalText: {
         fontSize: 23,
-        marginBottom: 10,
         fontWeight: '700',
-        // fontFamily: 'Roboto',
         color: 'black',
     },
     divider: {
         marginTop: 10,
         width: 223,
         height: 2,
-        backgroundColor: '#988D8D',
+        // backgroundColor: '#988D8D',
     },
     dateContainer: {
         justifyContent: 'flex-start',

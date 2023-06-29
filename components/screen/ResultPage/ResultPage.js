@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Banner from '../Banner/Banner';
-import { View, TouchableOpacity, Text, Image, Modal, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableOpacity, Text, Image, Modal, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import { styles } from './ResultPage.style';
 
 const ResultPage = ({ navigation }) => {
@@ -41,10 +41,12 @@ const ResultPage = ({ navigation }) => {
           <Image style={{ width: 20, height: 20 }} source={require('../../../assets/images/cancel.png')} />
         </TouchableOpacity>
       </View>
+      <ScrollView>
+
       <View style={styles.cardContainer}>
-        {cardData.map((card) => (
+        {cardData.map((card, index) => (
           <TouchableOpacity
-            key={card.id + Date.now()}
+            key={index}
             style={[styles.card, { backgroundColor: card.class === 'ok' ? '#01B14F' : '#E60A32' }]}
             onPress={() => handleCardPress(card.id, card.result2)}
           >
@@ -58,6 +60,8 @@ const ResultPage = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
+      </ScrollView>
+
     </View>
   );
 };

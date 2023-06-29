@@ -27,18 +27,16 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: '#cdd9c1',
     borderRadius: 9.154,
-    borderWidth: 1.716,
-    borderColor: '#0665A5',
-    shadowColor: '#000',
+    borderWidth: 1,
+    borderColor: '#104691',
     shadowOffset: {
       width: 0,
       height: 4.57704496383667,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 4.57704496383667,
-    elevation: 5,
+    // shadowRadius: 4.57704496383667,
+    // elevation: 5,
   },
   cardTitle: {
     fontSize: 13,
@@ -104,7 +102,9 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.095,
     color: 'rgba(238, 14, 81, 0.80)',
   },
-  icon: {},
+  icon: {
+    width: 20,
+  },
   header: {
     left: '50%',
     width: 78,
@@ -123,6 +123,6 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'white'
   },
 });

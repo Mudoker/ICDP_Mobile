@@ -30,7 +30,7 @@ const PhotoSelectionPage = ({ navigation }) => {
   const [selectedImages, setSelectedImages] = useState([]);
 
   // Maximum number of images can be selected at a time
-  const MAX_IMAGES = 5;
+  const MAX_IMAGES = 10;
 
   // Function: Choose photo from library
   const handleChoosePhoto = async () => {
@@ -44,8 +44,8 @@ const PhotoSelectionPage = ({ navigation }) => {
       // Highest quality
       // quality: 1,
       multiple: true,
-      selectionLimit: 5,
-      maxFiles: MAX_IMAGES - selectedImages.length,
+      selectionLimit: MAX_IMAGES,
+      // maxFiles: MAX_IMAGES - selectedImages.length,
     };
     ImagePicker.launchImageLibrary(options, async (response) => {
       try {
@@ -133,22 +133,22 @@ const PhotoSelectionPage = ({ navigation }) => {
         image.forEach(element => {
           data.append('image', {
             uri: element?.uri,  // ! Path image
-            type: 'image/jpeg',
-            name: element?.name // ! Name image add
+            // type: 'image/jpg',
+            name: element?.name + '.jpg'// ! Name image add
           });
         });
       }
       else {
         data.append('image', {
           uri: image?.uri,  // ! Path image
-          type: 'image/jpeg',
-          name: image?.name // ! Name image add
+          // type: 'image/jpg',
+          name: image?.name + '.jpg' // ! Name image add
         });
       }
 
       let config = {
         method: 'post',
-        url: 'http://1.52.246.101:5000/handle-lcd/handle-lcd',
+        url: 'http://1.52.246.101:5000/handle-lcd/handle-lcd-v2',
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -159,10 +159,11 @@ const PhotoSelectionPage = ({ navigation }) => {
       if (Object.keys(data).length === 0 || payload.data.data[0].class !== 'ok') {
         setStatus('');
         setStatus(false);
-        setData({});
+        setData(data);
         return;
       } else if (Object.keys(data).length === 1) {
         setStatus('');
+
         setData(data);
         setStatus(true);
       } else {
@@ -211,18 +212,18 @@ const PhotoSelectionPage = ({ navigation }) => {
       >
         <Image style={styles.buttonImage} source={require('../../../assets/images/image_lib.png')}></Image>
         <Text style={styles.buttonText}>
-          Drag-n-Drop to upload
+          Thêm ảnh từ thiết bị
         </Text>
       </TouchableOpacity>
 
       {/* Take a picture */}
       <TouchableOpacity
-        style={[styles.buttonLibrary, { top: 500 }]}
+        style={[styles.buttonLibrary, { top: 500, borderColor: '#c4b93f' }]}
         onPress={handleTakePhoto}
       >
         <Image style={styles.buttonImage} source={require('../../../assets/images/image_photo.png')}></Image>
         <Text style={styles.buttonText}>
-          Take a photo
+          Chụp thông số máy đo
         </Text>
       </TouchableOpacity>
       <TouchableOpacity

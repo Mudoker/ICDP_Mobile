@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 
 import { delay } from '../../../utils/helpers.utils';
-import { CountDownText } from 'react-native-countdown-timer-text';
 import OTPView from '../OTP/OTPView.js';
 import { fetchAPI, login } from '../../../utils/api.utils';
 import { Snackbar } from 'react-native-paper';
@@ -241,7 +240,7 @@ export default function Login({ navigation }) {
                 {otp ? <OTPView autoFocus={true} setOtpInput={setOtpInput} /> : null}
               </View>
               {/* Button đăng nhập */}
-              <View style={styles.buttonContainer}>
+              <View style={[styles.buttonContainer, { zIndex: otpInput.length === 6 ? 1111 : 1 }]}>
                 <TouchableOpacity style={[styles.button, { top: otp ? 40 + 20 : 20 }]} onPress={onPressLogin}>
                   <Text style={styles.buttonText}>
                     {txtButtonLogin}

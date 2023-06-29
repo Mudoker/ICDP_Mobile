@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
-    constainer: {
+    container: {
         // alignItems: 'center',
         // justifyContent: 'center',
         // alignContent: 'center',
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         boxSizing: 'border-box',
         position: 'absolute',
         width: 248,
-        height: 120,
+        height: 130,
         left: '50%',
         top: '50%',
         marginTop: -60,

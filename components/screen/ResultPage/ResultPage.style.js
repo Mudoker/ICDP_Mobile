@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   card: {
     top: 0,
     width: (Dimensions.get('window').width - 45) / 2, // Divide width equally for 3 items per line
-    height: 320,
+    height: 280,
     marginBottom: 16,
     marginHorizontal: 10,
     alignItems: 'flex-start', // Căng lề trai chữ trong card
