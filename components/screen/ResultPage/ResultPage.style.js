@@ -1,40 +1,36 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
-  scrollDashboard: {
-    // ! Card 2 column
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
   cardContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start', // Align cards to the left
+    marginTop: 10,
     alignContent: 'center',
-    marginTop: 16,
+    width: '100%'
   },
   card: {
-    width: (Dimensions.get('window').width - 60) / 2, // Divide width equally for 3 items per line
-    height: 125,
+    top: 0,
+    width: (Dimensions.get('window').width - 45) / 2, // Divide width equally for 3 items per line
+    height: 280,
     marginBottom: 16,
     marginHorizontal: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#cdd9c1',
-    borderRadius: 9.154,
+    alignItems: 'flex-start', // Căng lề trai chữ trong card
+    borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#104691',
+    borderColor: '#808890',
     shadowOffset: {
       width: 0,
       height: 4.57704496383667,
     },
+    shadowOpacity: 0.25,
     // shadowRadius: 4.57704496383667,
     // elevation: 5,
   },
@@ -42,6 +38,11 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  cardCategory: {
+    paddingLeft: 5,
+    paddingBottom: 5,
+    textAlign: 'left',
   },
   buttonLibrary: {
     boxSizing: 'border-box',
@@ -92,8 +93,10 @@ export const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 20
   },
   title: {
+    marginTop: 5,
     marginLeft: 8,
     fontStyle: 'normal',
     fontWeight: '700',
@@ -102,9 +105,7 @@ export const styles = StyleSheet.create({
     letterSpacing: 0.095,
     color: 'rgba(238, 14, 81, 0.80)',
   },
-  icon: {
-    width: 20,
-  },
+  icon: {},
   header: {
     left: '50%',
     width: 78,
@@ -123,6 +124,12 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: '#FFFFFF',
   },
+  modalContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });

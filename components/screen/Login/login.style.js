@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
     // fontFamily: 'Neue Haas Grotesk Text Pro',
     fontWeight: '700',
     fontSize: 10,
-    top: -30,
+    top: -23,
     letterSpacing: 0.035,
     alignSelf: 'center'
   },
@@ -128,6 +128,7 @@ export const styles = StyleSheet.create({
   otpContainer: {
     flex: 1,
     alignSelf: 'center',
+    zIndex: 999
   },
   funcText: {
     fontWeight: '700',
@@ -138,14 +139,16 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonContainer: {
-    flex: 0.7,
+    // flex: 0.7, -> Format error on Android
+    flex: 0.4,
     alignSelf: 'stretch',
     justifyContent: 'center',
     flexDirection: 'column',
-    top: -290,
+    top: -380,
+    zIndex: 111
   },
   button: {
-    zIndex: 9999,
+    zIndex: 100,
     backgroundColor: 'rgba(7, 121, 255, 0.8)',
     width: 205,
     height: 31,

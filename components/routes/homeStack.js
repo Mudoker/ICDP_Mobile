@@ -7,8 +7,15 @@ import { Banner } from 'react-native-paper';
 import Login from '../screen/Login/Login';
 import OTPScreen from '../screen/OTP/OTPView';
 import Status from '../screen/ImageProcessing/Status';
+import ResultPage from '../screen/ResultPage/ResultPage';
 const screens = {
   // Register screens
+  // PhotoSelectionPage: {
+  //   screen: PhotoSelectionPage,
+  //   navigationOptions: {
+  //     headerShown: false, // Hide the screen title
+  //   },
+  // },
   Login: {
     screen: Login,
     navigationOptions: {
@@ -40,8 +47,14 @@ const screens = {
       headerShown: false, // Hide the screen title
     },
   },
-    Status: {
+  Status: {
     screen: Status,
+    navigationOptions: {
+      headerShown: false, // Hide the screen title
+    },
+  },
+  ResultPage: {
+    screen: ResultPage,
     navigationOptions: {
       headerShown: false, // Hide the screen title
     },

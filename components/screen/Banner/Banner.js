@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     backIcon: {
         position: 'absolute',
-        top: '70%',
+        top: '63%',
         right: 0,
         zIndex: 100,
         marginRight: 15
@@ -61,8 +61,8 @@ const Banner = ({ navigation }) => {
             {/* Menu toggle */}
             <TouchableOpacity onPress={toggleVisibility} style={styles.backIcon}>
             {
-                isVisible ? <Image source={require('../../../assets/images/cancel_icon.png')}></Image> : 
-                <Image source={require('../../../assets/images/nav.png')}></Image>
+                isVisible ? <Image source={require('../../../assets/images/cancel_icon.png')} style={{width: 23, height: 23}}></Image> : 
+                <Image source={require('../../../assets/images/nav.png')} style={{width: 23, height: 23}}></Image>
             }
             </TouchableOpacity>
             {/* Will be updated!*/}

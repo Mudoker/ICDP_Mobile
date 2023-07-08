@@ -1,24 +1,21 @@
 import * as React from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { DrawContent } from './components/CustomDrawer';
 import Home from './components/Home';
 import SignInScreen from './components/screen/Login/Login';
 import PhotoSelectionPage from './components/screen/ImageProcessing/ImageProcessing'
 import MyStack from './components/SidebarMenu';
-import {Reanimated} from 'react-native-reanimated';
+import { Reanimated } from 'react-native-reanimated';
 import Dashboard from './components/screen/Dashboard/Dashboard';
-// Reanimated.initialize();
 import { AuthContext } from './components/Context/AuthContext';
 import Navigator from './components/routes/homeStack'
 import NavPane from './components/screen/NavPane/NavPane';
 import Banner from './components/screen/Banner/Banner';
 import Status from './components/screen/ImageProcessing/Status';
-const Drawer = createDrawerNavigator();
-const Stack = createNativeStackNavigator();
-
+import Loader from './components/screen/Loader/Loader';
+import Result from './components/screen/ResultPage/ResultPage';
+import Scanner from './components/screen/ImageProcessing/Scanner';
 const App = () => {
   const initLoginState = {
     isLoading: true,
@@ -103,8 +100,9 @@ const App = () => {
     // </AuthContext.Provider>
     // <Dashboard/>
     // <PhotoSelectionPage/>
+    // <Result/>
     // <Dashboard/>
-    <Navigator />
+    // <Navigator />
     // <Status></Status>
     // <Banner/>
     // // <NavPane/>
@@ -123,6 +121,8 @@ const App = () => {
     //     )}
     //   </NavigationContainer>
     // </AuthContext.Provider>
+    // <Loader></Loader>
+    <Scanner />
   );
 };
 
