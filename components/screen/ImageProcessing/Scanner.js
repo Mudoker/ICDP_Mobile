@@ -31,12 +31,20 @@ export default function App() {
         try {
             const formData = new FormData();
             formData.append('image', {
-                uri: imageUri,
-                name: 'image.jpg',
-                type: 'image/jpeg',
+                uri: element?.uri,  // ! Path image
+                // type: 'image/jpg',
+                name: element?.name + '.jpg'// ! Name image add
             });
-
-            const response = await axios.post('http://1.52.246.101:5000/handle-lcd/valid', formData);
+            let config = {
+                method: 'post',
+                url: 'http://1.52.246.101:5000/handle-lcd/valid',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: data
+            };
+            const response = await axios.post(config);
+            console.log('Response:', response.data);
             const { status, message } = response.data;
 
             if (status) {
