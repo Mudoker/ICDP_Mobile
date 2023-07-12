@@ -15,7 +15,7 @@ import Banner from './components/screen/Banner/Banner';
 import Status from './components/screen/ImageProcessing/Status';
 import Loader from './components/screen/Loader/Loader';
 import Result from './components/screen/ResultPage/ResultPage';
-import Scanner from './components/screen/ImageProcessing/Scanner';
+import Scanner from './components/screen/ImageProcessing/Scanner_expo';
 const App = () => {
   const initLoginState = {
     isLoading: true,
@@ -102,7 +102,7 @@ const App = () => {
     // <PhotoSelectionPage/>
     // <Result/>
     // <Dashboard/>
-    // <Navigator />
+    <Navigator />
     // <Status></Status>
     // <Banner/>
     // // <NavPane/>
@@ -122,7 +122,6 @@ const App = () => {
     //   </NavigationContainer>
     // </AuthContext.Provider>
     // <Loader></Loader>
-    <Scanner />
   );
 };
 
