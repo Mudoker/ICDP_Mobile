@@ -16,6 +16,7 @@ import Status from './components/screen/ImageProcessing/Status';
 import Loader from './components/screen/Loader/Loader';
 import Result from './components/screen/ResultPage/ResultPage';
 import Scanner from './components/screen/ImageProcessing/Scanner_expo';
+import Calendar from './components/screen/Tools/Calendar';
 const App = () => {
   const initLoginState = {
     isLoading: true,
@@ -102,7 +103,8 @@ const App = () => {
     // <PhotoSelectionPage/>
     // <Result/>
     // <Dashboard/>
-    <Navigator />
+    // <Navigator />
+    <Calendar />
     // <Status></Status>
     // <Banner/>
     // // <NavPane/>
