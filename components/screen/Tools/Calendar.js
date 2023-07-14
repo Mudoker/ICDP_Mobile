@@ -24,6 +24,17 @@ const CalendarView = () => {
         }
     };
 
+    const handleColor = (eventName) => {
+        if (eventName === 'OLT') {
+            return 'purple';
+        } else if (eventName === 'HW') {
+            return 'green';
+        } else if (eventName === 'Reboot POP') {
+            return 'orange';
+        } else {
+            return 'lightblue';
+        }
+    }
     // Loop through events and create marked dates with dots
     const markedDates = events.reduce((result, event) => {
         // Get the event date
@@ -40,19 +51,15 @@ const CalendarView = () => {
         }
 
         // Set color for dot base on event type
-        let dotColor = '';
+        let dotColor = handleColor(event.eventName);
         let tool = '';
         if (event.eventName === 'OLT') {
-            dotColor = 'purple';
             tool = 'OLT';
         } else if (event.eventName === 'HW') {
-            dotColor = 'green';
             tool = 'HW';
         } else if (event.eventName === 'Reboot POP') {
-            dotColor = 'orange';
             tool = 'Reboot POP';
         } else {
-            dotColor = 'lightblue';
             tool = 'Other';
         }
 
@@ -118,9 +125,9 @@ const CalendarView = () => {
                             return (
                                 <TouchableOpacity key={index} style={{ flexDirection: 'row' }}>
                                     <View style={{ marginBottom: 10 }}>
-                                        <Text> {event.startTime}</Text>
+                                        <Text> {event.startTime} </Text>
                                     </View>
-                                    <View style={{ height: 27, width: 3, backgroundColor: markedDates[selected].dots[index].color }}></View>
+                                    <View style={{ height: 27, width: 3, backgroundColor: handleColor(event.eventName) }}></View>
                                     <View style={{ marginBottom: 10 }}>
                                         <Text> {event.eventName}</Text>
                                         <Text> {event.author}</Text>
