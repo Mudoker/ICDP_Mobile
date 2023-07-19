@@ -1,5 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import Toast from 'react-native-toast-message';
+import Loader from '../Loader/Loader';
 import {
   Text,
   View,
@@ -11,18 +13,22 @@ import {
   KeyboardAvoidingView,
   StatusBar,
   TouchableWithoutFeedback,
+  ToastAndroid,
 } from 'react-native';
 
 import { delay } from '../../../utils/helpers.utils';
-import { CountDownText } from 'react-native-countdown-timer-text';
 import OTPView from '../OTP/OTPView.js';
-import { fetchAPI } from '../../../utils/api.utils';
+import { fetchAPI, login } from '../../../utils/api.utils';
 import { Snackbar } from 'react-native-paper';
 
 // import {AuthContext} from '../Context/AuthContext';
 import { styles } from './login.style';
 import { ImageBackground } from 'react-native';
 export default function Login({ navigation }) {
+
+  const TXT_OTP = 'OTP';
+  const TXT_LOGN = 'ĐĂNG NHẬP';
+
   const LOGIN_AUTHEN_URL = 'role-management/user/login-authen-2fa';
   const REGISTER_GET_OTP = 'role-management/user/register-authen-2fa';
 
@@ -38,6 +44,9 @@ export default function Login({ navigation }) {
   const [otpInput, setOtpInput] = React.useState('');
   const [visible, setVisible] = React.useState(false);
   const [snackBarText, setSnackBarText] = React.useState('');
+  const [isLoad, setLoad] = useState(false);
+  const [option, setOption] = useState('loading');
+  const [txtButtonLogin, setTxtButtonLogin] = React.useState(TXT_OTP);
 
   // const {signIn} = React.useContext(AuthContext);
 
@@ -46,7 +55,8 @@ export default function Login({ navigation }) {
       if (
         value.trim().includes('@fpt.net') ||
         value.trim().includes('@vienthongtin.com') ||
-        value.trim().includes('@fpt.com.vn')
+        value.trim().includes('@fpt.com.vn') ||
+        value.trim().includes('@fpt.com')
       ) {
         setData({
           ...data,
@@ -74,12 +84,72 @@ export default function Login({ navigation }) {
 
   const inputPasswordRef = useRef('txtPassword');
   const onPressLogin = async () => {
+    console.log(data);
     if (!data.isValidUser) {
+      Toast.show({
+        type: 'error',
+        text1: data.username === '' ? 'Vui lòng điền email để đăng nhập!' : 'Email không hợp lệ vui lòng thử lại!',
+      }, ToastAndroid.SHORT);
       setSnackBarText('Invalid Email!');
       setVisible(true);
     } else {
-      alert('Login successfully')
+      if (txtButtonLogin === TXT_OTP) {
+        setTxtButtonLogin(TXT_LOGN);
+        Toast.show({
+          type: 'info',
+          text1: 'Nhập mã OTP của bạn.',
+        }, ToastAndroid.SHORT);
+      } else if (txtButtonLogin === TXT_LOGN) {
+        setTxtButtonLogin(TXT_OTP);
+        Toast.show({
+          type: 'info',
+          text1: 'Vui lòng đợi...',
+        }, ToastAndroid.SHORT);
+        const res = await login('post', 'http://1.52.246.101:5000/user/login-user', { email: data?.username, otp: '123456' });
+        console.log('-----------', res);
+        if (!res || !JSON.parse(res)?.status) {
+          setSnackBarText('Invalid Email!');
+          setVisible(true);
+          Toast.show({
+            type: 'error',
+            text1: 'Đăng nhập không thành công!',
+          }, ToastAndroid.SHORT);
+        } else {
+          const convertRes = JSON.parse(res);
+          console.log('**************', convertRes.data);
+          setTxtButtonLogin(TXT_OTP);
+          setOption('loading');
+          setLoad(true);
+
+          let secondTimeout; // Declare a variable to hold the second timeout
+
+          let timeOut = setTimeout(() => {
+            setLoad(false);
+
+            setTimeout(() => {
+              Toast.show({
+                type: 'success',
+                text1: `Đăng nhập thành công.\nXin chào ${data?.username}!`,
+                onHide: () => {
+                  navigation.navigate('Dashboard', convertRes);
+                },
+                duration: 500,
+              });
+            }, 500); // Wait for 500ms before showing the Toast
+          }, 4000); // Wait for 4 seconds before setting `setLoad(false)`
+
+          // Function to cancel the second timeout and navigate
+          const cancelTimeoutAndNavigate = () => {
+            clearTimeout(timeOut);
+            navigation.navigate('Dashboard', convertRes);
+          };
+
+          // Start a timer to call the cancelTimeoutAndNavigate function after 500ms
+          setTimeout(cancelTimeoutAndNavigate, 5000);
+        }
+      }
       setOtp(prev => !prev)
+      setVisible(false);
     };
   };
 
@@ -129,59 +199,67 @@ export default function Login({ navigation }) {
       end={{ x: 1, y: 1 }}
     >
       <SafeAreaView style={[styles.container, { paddingTop: 120 }]}>
+        <Toast />
+        {/* <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}> */}
         <Text style={styles.title}>FTEL - KTKT - INF MN</Text>
         <StatusBar barStyle="light-content" />
-        <KeyboardAvoidingView behavior="height" style={styles.container}>
-          <TouchableWithoutFeedback
-            style={styles.container}
-            accessible={true}
-            onPress={Keyboard.dismiss}>
-            <View style={styles.logoContainer}>
-              <View style={styles.wrapLogo}>
-                <Image
-                  style={styles.logo}
-                  source={require('../../../assets/images/INAS_mobile_logo.png')}
-                />
-              </View>
-              <View style={styles.infoContainer}>
-                <Text style={styles.notifyContainer}>
-                  Welcome to App ICDP
-                </Text>
-                <Text style={styles.footNote}>Hướng dẫn chi tiết <Text style={styles.footNoteLink} >Tại đây</Text> </Text>
-                <TextInput
-                  
-                  style={styles.input}
-                  placeholder="Email ID"
-                  placeholderTextColor="rgb(80, 78, 112)"
-                  keyboardType="email-address"
-                  returnKeyType="next"
-                  autoCorrect={false}
-                  onChangeText={value => textInputChange(value)}
-                  onSubmitEditing={() => inputPasswordRef.current.focus()}
-                />
-                <Image
-                  style={styles.icon} source={require('../../../assets/images/email_icon.png')} />
-                <View style={styles.otpContainer}>
-                  {otp ? <OTPView setOtpInput={setOtpInput} /> : null}
-                </View>
-                <View style={styles.buttonContainer}>
-                  <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText} onPress={onPressLogin}>
-                      Login
-                    </Text>
-                  </TouchableOpacity>
-                  <View style={styles.helpTextContainer}>
-                    <Text style={styles.helpText}><View style={styles.stroke} />Trợ giúp<View style={styles.stroke} /></Text>
-                    <Text style={styles.funcText}>GỬI LẠI MÃ OTP</Text>
-                    <Text style={styles.funcText}>KHÔNG THỂ ĐĂNG NHẬP?</Text>
-                  </View>
 
-                  {/* <TouchableOpacity
+        <TouchableWithoutFeedback
+          style={styles.container}
+          accessible={true}
+          onPress={Keyboard.dismiss}>
+          <View style={styles.logoContainer}>
+            <View style={styles.wrapLogo}>
+              <Image
+                style={styles.logo}
+                source={require('../../../assets/images/INAS_mobile_logo.png')}
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <Text style={styles.notifyContainer}>
+                Welcome to ICDP App
+              </Text>
+              <Text style={styles.footNote}>Hướng dẫn đăng nhập hệ thống <Text style={styles.footNoteLink} >Tại đây</Text> </Text>
+              <TextInput
+
+                style={styles.input}
+                placeholder="Email ID"
+                placeholderTextColor="rgb(80, 78, 112)"
+                keyboardType="email-address"
+                returnKeyType="next"
+                autoCorrect={false}
+                onChangeText={value => textInputChange(value)}
+                onSubmitEditing={() => inputPasswordRef.current.focus()}
+              />
+              <Image style={styles.icon} source={require('../../../assets/images/email_icon.png')} />
+
+              {/* Form OPT input */}
+              <View style={styles.otpContainer}>
+                {otp ? <OTPView autoFocus={true} setOtpInput={setOtpInput} /> : null}
+              </View>
+              {/* Button đăng nhập */}
+              <View style={[styles.buttonContainer, { zIndex: otpInput.length === 6 ? 1111 : 1 }]}>
+                <TouchableOpacity style={[styles.button, { top: otp ? 40 + 20 : 20 }]} onPress={onPressLogin}>
+                  <Text style={styles.buttonText}>
+                    {txtButtonLogin}
+                  </Text>
+                </TouchableOpacity>
+
+                {/* Help */}
+                <View style={[styles.helpTextContainer, { top: otp ? 40 + 20 : 20 }]}>
+                  <Text style={styles.helpText}><View style={styles.stroke} />Trợ giúp<View style={styles.stroke} /></Text>
+                  <Text style={styles.funcText}>GỬI LẠI MÃ OTP</Text>
+                  <Text style={styles.funcText}>KHÔNG THỂ ĐĂNG NHẬP?</Text>
+                </View>
+
+                {/* <TouchableOpacity
                     style={!getOtp ? styles.button : styles.buttonDisabled}
                     disabled={getOtp}
                     onPress={onGetOTP}>
                     <Text style={styles.buttonText}>
-                      GET OTP{' '}
+                      GET OTP
                       {getOtp ? (
                         <CountDownText
                           countType="seconds"
@@ -196,25 +274,25 @@ export default function Login({ navigation }) {
                       ) : null}
                     </Text>
                   </TouchableOpacity> */}
-                </View>
               </View>
-              <Image style={styles.authorContainer} source={require('../../../assets/images/foot_image.png')}></Image>
-              <Snackbar
-                visible={visible}
-                duration={2000}
-                onDismiss={onDismissSnackBar}
-                wrapperStyle={{ top: -120 }}
-                style={{ borderRadius: 30 }}
-                action={{
-                  label: 'Ok!',
-                  onPress: () => { },
-                }}>
-                {snackBarText}
-              </Snackbar>
             </View>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+            <Image style={styles.authorContainer} source={require('../../../assets/images/foot_image.png')}></Image>
+            <Snackbar
+              visible={visible}
+              duration={2000}
+              onDismiss={onDismissSnackBar}
+              wrapperStyle={{ top: -120 }}
+              style={{ borderRadius: 30, height: 10 }}
+              action={{
+                label: 'Ok!',
+                onPress: () => { },
+              }}>
+            </Snackbar>
+          </View>
+        </TouchableWithoutFeedback>
+        {/* </KeyboardAvoidingView> */}
       </SafeAreaView>
+      {isLoad !== false && <Loader status={isLoad} option={option} />}
     </LinearGradient>
   );
 }

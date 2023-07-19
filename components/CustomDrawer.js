@@ -6,7 +6,7 @@ import {List, Avatar, Title, Caption, Drawer} from 'react-native-paper';
 import {AuthContext} from './Context/AuthContext';
 
 export function DrawContent(props) {
-  const {signOut} = React.useContext(AuthContext);
+  // const {signOut} = React.useContext(AuthContext);
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
